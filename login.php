@@ -25,6 +25,7 @@
 </head><!--/head-->
 
 <body>
+	<div> 
 	<header id="header"><!--header-->
 <!-- 		<div class="header_top">
 			<div class="container">
@@ -148,14 +149,10 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Login to your account</h2>
-						<form action="#">
-							<input type="text" placeholder="Name" />
-							<input type="email" placeholder="Email Address" />
-							<span>
-								<input type="checkbox" class="checkbox"> 
-								Keep me signed in
-							</span>
-							<button type="submit" class="btn btn-default">Login</button>
+						<form action="logintest.php" method="POST" id="LoginForm">
+							<input type="text" id="txtUsername" name="uname" placeholder="User Name" />
+							<input type="password" id="txtPassword" name="pword" placeholder="Password" />
+							<button type="submit" value="login" name="login" class="btn btn-default">Login</button>
 						</form>
 					</div><!--/login form-->
 				</div>
@@ -165,7 +162,7 @@
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<h2>New User Signup!</h2>
-						<form action="#">
+						<form action="login.php">
 							<input type="text" placeholder="Name"/>
 							<input type="email" placeholder="Email Address"/>
 							<input type="password" placeholder="Password"/>
