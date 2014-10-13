@@ -42,6 +42,7 @@ CREATE TABLE restaurant_info (
   Address VARCHAR(100) NULL,
   Restrt_Type VARCHAR(50) NULL,
   Description VARCHAR(200) NULL,
+  Img VARCHAR(200) NULL,
   PRIMARY KEY (Restrt_ID));
  
 #Create inventory_info table
@@ -54,7 +55,7 @@ CREATE TABLE inventory_info (
   Price FLOAT NULL,
   Date_Added DATETIME NULL,
   Category VARCHAR(50) NULL,
-  Img VARCHAR(200)NULL,
+  
   PRIMARY KEY (Item_ID),
   FOREIGN key (Restrt_ID) references restaurant_info(Restrt_ID));
  
