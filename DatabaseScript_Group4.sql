@@ -62,7 +62,7 @@ CREATE TABLE inventory_info (
 DROP TABLE IF EXISTS item_reviews;
 CREATE TABLE item_reviews (
   Review_ID VARCHAR(50) NOT NULL,
-  User_ID VARCHAR(50) NULL,
+  Username VARCHAR(50) NULL,
   Item_ID VARCHAR(50) NULL,
   Review_Date DATETIME NULL,
   Rate INT NULL,
