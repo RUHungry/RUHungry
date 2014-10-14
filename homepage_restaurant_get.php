@@ -1,7 +1,7 @@
 
 <?php
 #this funciton is for getting from DB
-include "db_connection.php"
+include "mysql.php"
 
 function homepageRestaurantInfo(){
 	$sql_select = "select * from restaurant_info;";

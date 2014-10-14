@@ -1,7 +1,7 @@
 
 <?php
 #this funciton is for getting from DB
-include "db_connection.php"
+include "mysql.php"
 if(isset($_POST['value'])){
 $restaurantNum = $_GET['value'];
 function homepageRestaurantInfo(){
