@@ -153,6 +153,10 @@
 							<label>Type:</label>
 							<br/>
 							<input type="text" id="add_Type" name="restaurant_type" placeholder=""/><br/>
+							<br/>
+							<label>Image:</label>
+							<br/>
+							<input type="text" id="add_Image" name="restaurant_image" placeholder=""/><br/>
 							<br/>	
 							<label>Description:</label>
 							<br/>				
@@ -207,6 +211,10 @@
 							<label>Type:</label>
 							<br/>
 							<input type="text" id="edit_Type" name="restaurant_type" placeholder=""/><br/>
+							<br/>
+							<label>Image:</label>
+							<br/>
+							<input type="text" id="edit_Image" name="restaurant_image" placeholder=""/><br/>
 							<br/>	
 							<label>Description:</label>
 							<br/>				
@@ -227,7 +235,8 @@
 			$Address=$_POST["restaurant_address"];
 			$Type=$_POST["restaurant_type"];
 			$Description=$_POST["restaurant_description"];
-			$insert_restrt = "INSERT INTO restaurant_info (Restrt_ID, Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description) VALUES ('$ID', '$Name', '$Area', '$Ship_Hours', '$Address', '$Type', '$Description');";
+			$Image=$_POST["restaurant_image"];
+			$insert_restrt = "INSERT INTO restaurant_info (Restrt_ID, Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description,Img) VALUES ('$ID', '$Name', '$Area', '$Ship_Hours', '$Address', '$Type', '$Description', '$Image');";
 			if(!mysqli_query($con, $insert_restrt)){
 				 echo "<script>alert('Failed!')</script>";
 			}
@@ -253,7 +262,8 @@
 			$Address=$_POST["restaurant_address"];
 			$Type=$_POST["restaurant_type"];
 			$Description=$_POST["restaurant_description"];
-			$edit_restrt = "UPDATE restaurant_info SET Restrt_Name='$Name', Area='$Area', Ship_Hours='$Ship_Hours', Address='$Address', Restrt_Type='$Type', Description='$Description' where Restrt_ID='$ID';";
+			$Image=$_POST["restaurant_image"];
+			$edit_restrt = "UPDATE restaurant_info SET Restrt_Name='$Name', Area='$Area', Ship_Hours='$Ship_Hours', Address='$Address', Restrt_Type='$Type', Description='$Description', Img='$Image' where Restrt_ID='$ID';";
 			if(!mysqli_query($con, $edit_restrt)){
 				 echo "<script>alert('Failed!')</script>";
 			}
@@ -267,13 +277,13 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th colspan=2 align= 'center' >Operation</th>
 					<th align= 'center' >Restaurant ID</th>
 					<th align= 'center' >Name</th>
 					<th align= 'center' >Area</th>
 					<th align= 'center' >Address</th>
 					<th align= 'center' >Type</th>
 					<th align= 'center' >Description</th>
+					<th align= 'center' >Image</th>
 				</tr>
 			</thead>
 			<?php
@@ -281,16 +291,14 @@
 				$restaurant_check_query = mysqli_query($con,"select * from restaurant_info");
 				while($row = mysqli_fetch_array($restaurant_check_query)) 
 				{
-				echo "<tr>";
-				echo "<td align= 'center'><button type=button OnClick=\"edit_Restrt()\" >Edit</td>";
-				echo "<td align= 'center'><button type=button OnClick=\"delete_Restrt()\">Delete</td>";
+				echo "<tr>";				
 				echo "<td>" . $row['Restrt_ID'] . "</td>";
 				echo "<td>" . $row['Restrt_Name'] . "</td>";
 				echo "<td>" . $row['Area'] . "</td>";
 				echo "<td>" . $row['Address'] . "</td>";
 				echo "<td>" . $row['Restrt_Type'] . "</td>";
 				echo "<td>" . $row['Description'] . "</td>";
-				
+				echo "<td>" . $row['Image'] . "</td>";
 				echo "</tr>";
 				}
 		
@@ -300,20 +308,6 @@
 		</table>    
 		     
 	</div>
-<script>
-	function delete_Restrt() {
-	    //var id=$(this).closest("tr").find("td:nth-child(5)").text();
-		$(this).parents('tr').remove()
-		//alert(id);
-		
-	}
-	
-	function edit_Restrt() {
-	    $("#contactdiv").css("display", "block");
-	}
-</script>
-	
-   
 
 </body>
 </html>
