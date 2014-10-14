@@ -128,8 +128,14 @@ session_start();
 						<h2>Category</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
 							<?php
+								
+								
 								include "restaurant_catagory_filter.php";
+								$_SERVER["QUERY_STRING"];
+								
+								$RestrtType = $_GET["Restrt_Type"];
 								restaurantType();
+								
 							?>
 							
 						</div><!--/category-products-->
@@ -144,8 +150,10 @@ session_start();
 						<?php
 						 	
 							include "restaurant_get.php";
-							
-							homepageRestaurantInfo();
+							$_SERVER["QUERY_STRING"];
+								
+							$RestrtType = $_GET["Restrt_Type"];
+							homepageRestaurantInfo($RestrtType);
 						?>
 						
 					</div><!--features_items-->
