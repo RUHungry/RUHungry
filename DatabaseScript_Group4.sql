@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS shipping_address;
 CREATE TABLE shipping_address (
   shipping_ID INT NOT NULL AUTO_INCREMENT,
   shipping_address VARCHAR(200) NOT NULL,
-  Username INT NOT NULL,
+  Username VARCHAR(50) NOT NULL,
   PRIMARY KEY (shipping_ID),
   FOREIGN KEY (Username) references customer_info (Username));
 
@@ -152,9 +152,9 @@ INSERT INTO restaurant_info (Restrt_Name, Area, Ship_Hours, Address, Restrt_Type
 INSERT INTO restaurant_info (Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description) VALUES ('Sakura', 'Arlington', '1', '2321 13th, Arlington, VA', 'Japanese', 'Sushi');
 
 # inventory_info test data
-INSERT INTO inventory_info (Item_Name, Item_Description, Price, Date_Added, Category) VALUES ('KongBaoChicken', 'ChickenwithPepper', '12.00', '2014-10-05 00:00:00', 'Chinese');
-INSERT INTO inventory_info (Item_Name, Item_Description, Price, Date_Added, Category) VALUES ('BeijingBeef', 'BeefwithMushroom', '12.00', '2014-10-05 00:00:00', 'Chinese');
-INSERT INTO inventory_info (Item_Name, Item_Description, Price, Date_Added, Category) VALUES ('Hunanpork', 'SautePork', '12.00', '2014-10-05 00:00:00', 'Chinese');
+INSERT INTO inventory_info (Restrt_ID, Item_Name, Item_Description, Price, Date_Added, Category) VALUES (1, 'KongBaoChicken', 'ChickenwithPepper', '12.00', '2014-10-05 00:00:00', 'Chinese');
+INSERT INTO inventory_info (Restrt_ID, Item_Name, Item_Description, Price, Date_Added, Category) VALUES (2, 'BeijingBeef', 'BeefwithMushroom', '12.00', '2014-10-05 00:00:00', 'Chinese');
+INSERT INTO inventory_info (Restrt_ID, Item_Name, Item_Description, Price, Date_Added, Category) VALUES (3, 'Hunanpork', 'SautePork', '12.00', '2014-10-05 00:00:00', 'Chinese');
 
 # item_reviews test data
 INSERT item_reviews (Username, Item_ID, Review_Date, Rate, Description) VALUES ('zhangzhenlin', 1, '2014-10-5 12:00:00', '4', 'SPICY enough!!!');
