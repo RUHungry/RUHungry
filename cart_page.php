@@ -1,5 +1,9 @@
 <!--this is page for loading all the items in one restaurant -->
 
+<?php	
+	include "cart_add.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +11,7 @@
 				    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 				    <meta name="description" content="">
 				    <meta name="author" content="">
-				    <title>Cart | E-Shopper</title>
+				    <title>RUHungry</title>
 				    <link href="css/bootstrap.min.css" rel="stylesheet">
 				    <link href="css/font-awesome.min.css" rel="stylesheet">
 				    <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -157,8 +161,8 @@
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="image">Item</td>
-							<td class="description"></td>
+							<td>Restaurant</td>
+							<td>Item</td>
 							<td class="price">Price</td>
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
@@ -168,8 +172,6 @@
 					<tbody>
 						<?php
 							//$username ="chenlongjiu";
-							include "db_connection";
-							include "cart_add.php";
 							//echo "hello";
 							$username = $_SESSION['username'];
 							checkCart($username);

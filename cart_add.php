@@ -1,7 +1,8 @@
 <?php
 	//this function will handle the post method and store the form into cart database
-	include "db_connection.php";
-
+	include "mysql.php";
+	session_start();
+	
 	function addCart(){
 		if(isset($_POST)){
 			$username = $_POST["username"];
@@ -11,7 +12,7 @@
 		}
 
 		$sql_insert = "insert into shopping_cart_info values(".$username.",".$itemid.",".$restrtname.",".$quality.");";
-		mysqli_query($db, $sql_isnert);
+		mysql_query($sql_isnert);
 		
 		print "index.php";
 	}
@@ -20,34 +21,35 @@
 	function checkCart($username){
 		if(isset($username)){
 			echo "worked!";
-			$sql_select = 'select username, shopping_cart_info.item_id, shopping_cart_info.restrt_id, shopping_cart_info.quantity, inventory_info.price from shopping_cart_info left join inventory_info on shopping_cart_info.item_id = inventory_info.item_id where username ="chenlongjiu";';
+			$sql_select = 'select inventory_info.Item_Name, restaurant_info.Restrt_Name, shopping_cart_info.Quantity, inventory_info.Price from shopping_cart_info 
+			left join inventory_info on shopping_cart_info.Item_ID = inventory_info.Item_ID left join restaurant_info on shopping_cart_info.Restrt_ID = restaurant_info.Restrt_ID where Username ="'.$username.'"';
 		}
 		else{ echo "not work!";}
-		$result = mysqli_query($db, $sql_select);
+		$result = mysql_query($sql_select) or die("sql error!");
 		
 
-		while($row = mysqli_fetch_array($result)){
+		while($row = mysql_fetch_array($result)){
 			//print html form of the shopping cart
 			$outputlist = "";
 			$outputlist.= '<tr>';
-			$outputlist.= '<td class="cart_product">';
-			$outputlist.= '<h4><a href="">'.$row["restrt_id"].'</a></h4>'
+			$outputlist.= '<td >';
+			$outputlist.= '<h4><a href="">'.$row["Restrt_Name"].'</a></h4>';
 			$outputlist.= '</td>';
-			$outputlist.= '<td class="cart_description">';
-			$outputlist.= '<p>'.$row["item_id"].'</p>';
+			$outputlist.= '<td>';
+			$outputlist.= '<p>'.$row["Item_Name"].'</p>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td class="cart_price">';
-			$outputlist.= '<p>'.$row["price"].'</p>';
+			$outputlist.= '<p>'.$row["Price"].'</p>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td class="cart_quantity">';
 			$outputlist.= '<div class="cart_quantity_button">';
 			$outputlist.= '<a class="cart_quantity_up" href=""> . </a>';
-			$outputlist.= '<input class="cart_quantity_input" type="text" name="quantity" value="'.$row["quality"].'" autocomplete="off" size="2" kl_vkbd_parsed="true">';
+			$outputlist.= '<input class="cart_quantity_input" type="text" name="quantity" value="'.$row["Quantity"].'" autocomplete="off" size="2" kl_vkbd_parsed="true">';
 			$outputlist.= '<a class="cart_quantity_down" href=""> - </a>';
 			$outputlist.= '</div>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td class="cart_total">';
-			$outputlist.= '<p class="cart_total_price">'.$row["price"]*$row["quality"].'</p>';
+			$outputlist.= '<p class="cart_total_price">'.$row["Price"]*$row["Quantity"].'</p>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td class="cart_delete">';
 			$outputlist.= '<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>';
