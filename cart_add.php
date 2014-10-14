@@ -20,11 +20,11 @@
 
 	function checkCart($username){
 		if(isset($username)){
-			echo "worked!";
-			$sql_select = 'select inventory_info.Item_Name, restaurant_info.Restrt_Name, shopping_cart_info.Quantity, inventory_info.Price from shopping_cart_info 
+			//echo "worked!";
+			$sql_select = 'select inventory_info.Item_Name, inventory_info.Item_ID, restaurant_info.Restrt_Name, shopping_cart_info.Quantity, inventory_info.Price from shopping_cart_info 
 			left join inventory_info on shopping_cart_info.Item_ID = inventory_info.Item_ID left join restaurant_info on shopping_cart_info.Restrt_ID = restaurant_info.Restrt_ID where Username ="'.$username.'"';
 		}
-		else{ echo "not work!";}
+		else{ echo "No user!";}
 		$result = mysql_query($sql_select) or die("sql error!");
 		
 
@@ -43,20 +43,29 @@
 			$outputlist.= '</td>';
 			$outputlist.= '<td class="cart_quantity">';
 			$outputlist.= '<div class="cart_quantity_button">';
-			$outputlist.= '<a class="cart_quantity_up" href=""> . </a>';
 			$outputlist.= '<input class="cart_quantity_input" type="text" name="quantity" value="'.$row["Quantity"].'" autocomplete="off" size="2" kl_vkbd_parsed="true">';
-			$outputlist.= '<a class="cart_quantity_down" href=""> - </a>';
 			$outputlist.= '</div>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td class="cart_total">';
-			$outputlist.= '<p class="cart_total_price">'.$row["Price"]*$row["Quantity"].'</p>';
+			$outputlist.= '<p class="cart_total_price">'.($row["Price"]*$row["Quantity"]).'</p>';
 			$outputlist.= '</td>';
-			$outputlist.= '<td class="cart_delete">';
-			$outputlist.= '<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>';
+			$outputlist.= '<td>';
+			$outputlist.= '<form action="cart_delete.php" method="post">  <input name="Item_Name" value="'.$row["Item_ID"].'" style="display:none;">';
+			$outputlist.= '<input name="Username" value="'.$username.'" style="display:none;">';
+			$outputlist.= '<button class="submit btn btn-default">delete</button> </form>';
 			$outputlist.= '</td>';
 			$outputlist.= '</tr>';
 			
 			print $outputlist;
+		}
+	}
+
+	function deleteItem($Username, $Item_ID){
+		if(isset($Username)){
+			$sql_delete = 'delete from shopping_cart_info where Username = "'.$Username.'" and Item_ID = "'.$Item_ID.'" ;';
+			mysql_query($sql_delete);
+		}else{
+			echo "not successful";
 		}
 	}
 
