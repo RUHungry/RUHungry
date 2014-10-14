@@ -63,13 +63,13 @@ DROP TABLE IF EXISTS item_reviews;
 CREATE TABLE item_reviews (
   Review_ID INT NOT NULL AUTO_INCREMENT,
   Username VARCHAR(50) NULL,
-  Item_ID INT NOT NULL,
+  Restrt_ID INT NOT NULL,
   Review_Date DATETIME NULL,
   Rate INT NULL,
-  Description VARCHAR(200) NULL,
+  Description VARCHAR(1200) NULL,
   PRIMARY KEY (Review_ID),
   FOREIGN key (Username) references customer_info(Username),
-  FOREIGN key (Item_ID) references inventory_info(Item_ID));
+  FOREIGN key (Restrt_ID) references inventory_info(Restrt_ID));
  
 #Create shopping_cart_info table
 DROP TABLE IF EXISTS shopping_cart_info;
@@ -157,9 +157,9 @@ INSERT INTO inventory_info (Restrt_ID, Item_Name, Item_Description, Price, Date_
 INSERT INTO inventory_info (Restrt_ID, Item_Name, Item_Description, Price, Date_Added, Category) VALUES (3, 'Hunanpork', 'SautePork', '12.00', '2014-10-05 00:00:00', 'Chinese');
 
 # item_reviews test data
-INSERT item_reviews (Username, Item_ID, Review_Date, Rate, Description) VALUES ('zhangzhenlin', 1, '2014-10-5 12:00:00', '4', 'SPICY enough!!!');
-INSERT item_reviews (Username, Item_ID, Review_Date, Rate, Description) VALUES ('zhangzhenlin', 2, '2014-10-5 12:00:00', '5', 'Yumme!!!');
-INSERT item_reviews (Username, Item_ID, Review_Date, Rate, Description) VALUES ('zhangzhenlin', 3, '2014-10-5 12:00:00', '4', 'So delicious!');
+INSERT item_reviews (Username, Restrt_ID, Review_Date, Rate, Description) VALUES ('zhangzhenlin', 1, '2014-10-5 12:00:00', '4', 'SPICY enough!!!');
+INSERT item_reviews (Username, Restrt_ID, Review_Date, Rate, Description) VALUES ('zhangzhenlin', 2, '2014-10-5 12:00:00', '5', 'Yumme!!!');
+INSERT item_reviews (Username, Restrt_ID, Review_Date, Rate, Description) VALUES ('zhangzhenlin', 3, '2014-10-5 12:00:00', '4', 'So delicious!');
 
 #shopping_cart_info test data
 INSERT INTO shopping_cart_info (Username , Item_ID , Restrt_ID , Quantity) VALUES ('lintianlang', 2, 1, 1);

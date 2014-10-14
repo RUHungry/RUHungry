@@ -11,12 +11,23 @@ if($_SESSION["islogin"] != true)
 	
 if (isset($_POST['submit']))
 {
-	$update = "update credit_card_hotlist set Card_Account = '".$_POST['account']."', Card_Type = '".$_POST['type'].
-	"', Card_Holder = '".$_POST['holder']."', Card_Expire = '".$_POST['exp_date']."', Bill_Address = '".$_POST['address']."'";
-	
-	$update_check = mysql_query($update) or die("Update failed.");
-	header("Location: profile_credit_card_info.php");
+	if($info['Card_Account'] != NULL)
+	{
+		$update = "update credit_card_hotlist set Card_Account = '".$_POST['account']."', Card_Type = '".$_POST['type'].
+		"', Card_Holder = '".$_POST['holder']."', Card_Expire = '".$_POST['exp_date']."', Bill_Address = '".$_POST['address']."'";
+		
+		$update_check = mysql_query($update) or die("Update failed.");
+		header("Location: profile_credit_card_info.php");
+	}
+	else
+	{
+		$insert = "insert into credit_card_hotlist set Username = '".$_SESSION["username"]."', Card_Account = '".$_POST['account']."', Card_Type = '".$_POST['type'].
+		"', Card_Holder = '".$_POST['holder']."', Card_Expire = '".$_POST['exp_date']."', Bill_Address = '".$_POST['address']."'";
+		$insert_check = mysql_query($insert) or die("Update failed.");
+		header("Location: profile_credit_card_info.php");
+	}
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

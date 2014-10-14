@@ -11,9 +11,18 @@ if($_SESSION["islogin"] != true)
 
 if (isset($_POST['submit']))
 {
-	$update = "update shipping_address set shipping_address = '".$_POST['address']."'";
-	$update_check = mysql_query($update) or die("Shipping address update failed.");
-	header("Location: profile_shipping_addr.php");
+	if($info['shipping_address'] != NULL)
+	{
+		$update = "update shipping_address set shipping_address = '".$_POST['address']."'";
+		$update_check = mysql_query($update) or die("Shipping address update failed.");
+		header("Location: profile_shipping_addr.php");
+	}
+	else
+	{
+		$insert = "insert into shipping_address set Username = '".$_SESSION["username"]."', shipping_address = '".$_POST['address']."'";
+		$insert_check = mysql_query($insert) or die("Shipping address update failed.");
+		header("Location: profile_shipping_addr.php");
+	}
 }
 ?>
 <!DOCTYPE html>
