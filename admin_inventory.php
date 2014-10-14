@@ -282,6 +282,7 @@
 					<th align= 'center' >Area</th>
 					<th align= 'center' >Address</th>
 					<th align= 'center' >Type</th>
+					<th align= 'center' >Ship Hours</th>
 					<th align= 'center' >Description</th>
 					<th align= 'center' >Image</th>
 				</tr>
@@ -297,6 +298,7 @@
 				echo "<td>" . $row['Area'] . "</td>";
 				echo "<td>" . $row['Address'] . "</td>";
 				echo "<td>" . $row['Restrt_Type'] . "</td>";
+				echo "<td>" . $row['Ship_Hours'] . "</td>";
 				echo "<td>" . $row['Description'] . "</td>";
 				echo "<td>" . $row['Image'] . "</td>";
 				echo "</tr>";
