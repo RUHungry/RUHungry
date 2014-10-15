@@ -9,7 +9,7 @@ function checkMenu($restrt_id){
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result)) {
 			$outputlist = "";
-			$outputlist.= '<tr>';
+			$outputlist.= '<form action="menu_cart_add.php" method="post"> <tr>';
 			$outputlist.= '<td >';
 			$outputlist.= '<h4><a href="">'.$row["Restrt_Name"].'</a></h4>';
 			$outputlist.= '</td>';
@@ -21,16 +21,17 @@ function checkMenu($restrt_id){
 			$outputlist.= '</td>';
 			$outputlist.= '<td class="cart_quantity">';
 			$outputlist.= '<div class="cart_quantity_button">';
-			$outputlist.= '<input class="cart_quantity_input" type="text" name="quantity" value="0" autocomplete="off" size="2" kl_vkbd_parsed="true">';
+			$outputlist.= '<input class="cart_quantity_input" type="text" name="Quantity" value="0" autocomplete="off" size="2" kl_vkbd_parsed="true">';
 			$outputlist.= '</div>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td class="cart_total">';
 			$outputlist.= '<p class="cart_total_price">'.($row["Price"]*$row["Quantity"]).'</p>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td>';
-			$outputlist.= '<form action="cart_delete.php" method="post">  <input name="Item_Name" value="'.$row["Item_ID"].'" style="display:none;">';
-			$outputlist.= '<input name="Username" value="'.$username.'" style="display:none;">';
-			$outputlist.= '<button class="submit btn btn-default">delete</button> </form>';
+			$outputlist.= '<input name="Item_ID" value="'.$row["Item_ID"].'" style="display:none;">';
+			$outputlist.= '<input name="Username" value="'.$_SESSION["username"].'" style="display:none;">';
+			$outputlist.= '<input name="Restrt_ID" value="'.$restrt_id.'" style="display:none;">';			
+			$outputlist.= '<button class="submit btn btn-default">Add</button> </form>';
 			$outputlist.= '</td>';
 			$outputlist.= '</tr>';
 			
