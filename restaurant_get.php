@@ -41,5 +41,24 @@ function homepageRestaurantInfo($RestrtType){
 			}
 		} 
 	}		
+	function homepageRestaurantSearch($search){
+		$sql_select = 'select * from restaurant_info WHERE Restrt_Name like "%'.$search.'%";'
+		;
+			$result = mysql_query($sql_select) or die("sql error!");
+			while($row = mysql_fetch_array($result)) {
+				$outputlist = "";
+				$outputlist.= '<div class="col-sm-4">';
+				$outputlist.= '<div class="product-image-wrapper">';
+				$outputlist.= '<div class="single-products">';
+				$outputlist.= '<div class="productinfo text-center">';
+				$outputlist.= '<img src="'.$row["Img"].'" alt="" />';
+				$outputlist.= '<h2>'.$row["Restrt_Name"].'</h2>';
+				$outputlist.= '<p>'.$row["Description"].'</p>';
+				$outputlist.= '<a action="inventory.php" class="btn btn-default" value="'.$row['Restrt_ID'].'" >More Detail</a>';
+				$outputlist.= '</div>';
+				$outputlist.= '</div></div></div>';
+				print $outputlist;
+			}
+	}
 ?>
 
