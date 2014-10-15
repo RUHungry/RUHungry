@@ -103,7 +103,7 @@ function getBillInfo()
 	{
 		var alertMessage ="";
     	if (document.getElementById("Ship_First_Name").value.length<1)
-    		alertMessage+="First_Name cannot be empty!\n\n";
+    		alertMessage+="First Name cannot be empty!\n\n";
     	if (document.getElementById("Ship_Address1").value.length<1)
     		alertMessage+="Address1 cannot be empty!\n\n";
     	if (document.getElementById("Ship_City").value.length<1)
@@ -127,7 +127,7 @@ function getBillInfo()
 	{
 		var alertMessage ="";
 		if (document.getElementById("Bill_First_Name").value.length<1)
-    		alertMessage+="First_Name cannot be empty!\n\n";
+    		alertMessage+="First Name cannot be empty!\n\n";
     	if (document.getElementById("Bill_Address1").value.length<1)
     		alertMessage+="Address1 cannot be empty!\n\n";
     	if (document.getElementById("Bill_City").value.length<1)
