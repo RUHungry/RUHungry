@@ -1,7 +1,7 @@
 <?php
 	
 	$restrt_id =$_POST["Restrt_ID"];
-	//header("Location: http://localhost:8888/RUHungry/menu_page.php?Restrt_Type=$restrt_id");
+	header("Location: http://localhost:8888/RUHungry/menu_page.php?Restrt_Type=$restrt_id");
 	//header("Location:cart_page.php");
 	//include "cart_add.php";
 	include "mysql.php";
