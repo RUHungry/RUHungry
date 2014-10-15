@@ -74,11 +74,12 @@ CREATE TABLE item_reviews (
 #Create shopping_cart_info table
 DROP TABLE IF EXISTS shopping_cart_info;
 CREATE TABLE shopping_cart_info (
+  Cart_ID INT NOT NULL AUTO_INCREMENT,
   Username VARCHAR(50) NOT NULL,
   Item_ID INT NOT NULL,
   Restrt_ID INT NOT NULL,
   Quantity INT NULL,
-  PRIMARY KEY (Username),
+  PRIMARY KEY (Cart_ID),
   FOREIGN key (Item_ID) references inventory_info(Item_ID),
   FOREIGN key (Restrt_ID) references restaurant_info(Restrt_ID));
  
