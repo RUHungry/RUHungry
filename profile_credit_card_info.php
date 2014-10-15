@@ -69,8 +69,8 @@ if (isset($_POST['submit']))
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="checkout.php"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="cart_page.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<?php if($_SESSION["islogin"] == true) echo('<li><a href="logout.php"><i class="fa fa-lock"></i> Logout</a></li>');
 									  else echo('<li><a href="login.php"><i class="fa fa-lock"></i> Login</a></li>');
 								?>								
