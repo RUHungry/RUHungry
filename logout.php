@@ -2,6 +2,7 @@
 session_start();
 
 unset($_SESSION['islogin']);
+unset($_SESSION['admin']);
 
 session_destroy();
 
