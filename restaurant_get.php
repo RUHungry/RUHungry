@@ -17,7 +17,7 @@ function homepageRestaurantInfo($RestrtType){
 			$outputlist.= '<img src="'.$row["Img"].'" alt="" />';
 			$outputlist.= '<h2>'.$row["Restrt_Name"].'</h2>';
 			$outputlist.= '<p>'.$row["Description"].'</p>';
-			$outputlist.= '<a action="inventory.php" class="btn btn-default" value="'.$row['Restrt_ID'].'" >More Detail</a>';
+			$outputlist.= '<a href="menu_page.php?Restrt_Type='.$row['Restrt_ID'].'" class="btn btn-default"  >More Detail</a>';
 			$outputlist.= '</div>';
 			$outputlist.= '</div></div></div>';
 			print $outputlist;
