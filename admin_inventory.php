@@ -1,3 +1,6 @@
+<?php
+	include "mysql.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,16 +37,6 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 
-<?php
-	// Create connection
-	$con=mysqli_connect("Localhost","root","","ruhungry");
-
-	// Check connection
-	if (mysqli_connect_errno()) {
-		echo "Failed to connect to MySQL: " . mysqli_connect_error();	
-	}
-	
-?>
 
 <body>
 	<header id="header"><!--header-->
@@ -237,7 +230,7 @@
 			$Description=$_POST["restaurant_description"];
 			$Image=$_POST["restaurant_image"];
 			$insert_restrt = "INSERT INTO restaurant_info (Restrt_ID, Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description,Img) VALUES ('$ID', '$Name', '$Area', '$Ship_Hours', '$Address', '$Type', '$Description', '$Image');";
-			if(!mysqli_query($con, $insert_restrt)){
+			if(!mysql_query($insert_restrt)){
 				 echo "<script>alert('Failed!')</script>";
 			}
 			else{
@@ -247,7 +240,7 @@
 		if($_POST["submit"]=='Delete'){
 			$ID=$_POST["restaurant_id"];
 			$delete_restrt = "DELETE FROM restaurant_info where Restrt_ID='$ID'";
-			if(!mysqli_query($con, $delete_restrt)){
+			if(!mysql_query($delete_restrt)){
 				 echo "<script>alert('Failed!')</script>";
 			}
 			else{
@@ -264,7 +257,7 @@
 			$Description=$_POST["restaurant_description"];
 			$Image=$_POST["restaurant_image"];
 			$edit_restrt = "UPDATE restaurant_info SET Restrt_Name='$Name', Area='$Area', Ship_Hours='$Ship_Hours', Address='$Address', Restrt_Type='$Type', Description='$Description', Img='$Image' where Restrt_ID='$ID';";
-			if(!mysqli_query($con, $edit_restrt)){
+			if(!mysql_query($edit_restrt)){
 				 echo "<script>alert('Failed!')</script>";
 			}
 			else{
@@ -289,8 +282,8 @@
 			</thead>
 			<?php
 				echo "<tbody>";
-				$restaurant_check_query = mysqli_query($con,"select * from restaurant_info");
-				while($row = mysqli_fetch_array($restaurant_check_query)) 
+				$restaurant_check_query = mysql_query("select * from restaurant_info");
+				while($row = mysql_fetch_array($restaurant_check_query)) 
 				{
 				echo "<tr>";				
 				echo "<td>" . $row['Restrt_ID'] . "</td>";
