@@ -69,7 +69,7 @@ CREATE TABLE item_reviews (
   Description VARCHAR(1200) NULL,
   PRIMARY KEY (Review_ID),
   FOREIGN key (Username) references customer_info(Username),
-  FOREIGN key (Restrt_ID) references inventory_info(Restrt_ID));
+  FOREIGN key (Restrt_ID) references restaurant_info(Restrt_ID));
  
 #Create shopping_cart_info table
 DROP TABLE IF EXISTS shopping_cart_info;
