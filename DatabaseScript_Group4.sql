@@ -91,7 +91,7 @@ CREATE TABLE credit_card_hotlist (
   Card_Account VARCHAR(50) NULL,
   Card_Type VARCHAR(15) NULL,
   Card_Holder VARCHAR(50) NULL,
-  Card_Expire DATETIME NULL,
+  Card_Expire VARCHAR(50) NULL,
   Bill_Address VARCHAR(150) NULL,
   PRIMARY KEY (Card_ID),
   FOREIGN key (Username) references customer_info (Username));
