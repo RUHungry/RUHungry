@@ -1,9 +1,8 @@
 <?php
-include "./mysql.php";
+include "mysql.php";
 include "cart_add.php";
 session_start();
-if($_SESSION["islogin"] != true)
-	header("Location: login.php");
+
 $con = mysql_connect("localhost","root","toor");
 if (!$con)
 	{
