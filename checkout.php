@@ -1,5 +1,6 @@
 <?php
 include "./mysql.php";
+include "cart_add.php";
 session_start();
 $con = mysql_connect("localhost","root","toor");
 if (!$con)
@@ -62,6 +63,10 @@ $tempname=$_SESSION["username"];
 
 <body>
 	<script type="text/javascript">
+	function pay()
+	{
+		
+	}
 	function setAddress(Adres)
 	{
 		var Address=Adres.split('| |',7);
@@ -352,7 +357,11 @@ $tempname=$_SESSION["username"];
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+					<?php 
+							$username = $_SESSION['username'];
+							checkCart($username);
+					?>
+						<!-- <tr>
 							<td class="cart_product">
 								<a href=""><img src="images/cart/one.png" alt=""></a>
 							</td>
@@ -450,12 +459,13 @@ $tempname=$_SESSION["username"];
 									</tr>
 								</table>
 							</td>
-						</tr>
+						</tr> -->
 					</tbody>
 				</table>
 			</div>
 			<div class="payment-options">
-					<span>
+				<button id="btn_pay" name="btn_pay" onclick="pay()" >PAY</button>
+					<!-- <span>
 						<label><input type="checkbox"> Direct Bank Transfer</label>
 					</span>
 					<span>
@@ -463,8 +473,8 @@ $tempname=$_SESSION["username"];
 					</span>
 					<span>
 						<label><input type="checkbox"> Paypal</label>
-					</span>
-				</div>
+					</span> -->
+			</div>
 		</div>
 		</div>
 	</section> <!--/#cart_items-->
