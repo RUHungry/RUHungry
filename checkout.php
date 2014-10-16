@@ -1,27 +1,29 @@
 <?php
-// include "./mysql.php";
-// session_start();
+include "./mysql.php";
+session_start();
 $con = mysql_connect("localhost","root","toor");
 if (!$con)
 	{
 		die('Could not connect: ' . mysql_error());
 	}
 mysql_select_db("ruhungry", $con);
-$tempname="zhangzhenlin";
+$tempname=$_SESSION["username"];
 function getAddressInfo()
 {	
-	$sql_select = "SELECT * FROM shipping_address WHERE Username = '"."zhangzhenlin"."'";
+$tempname=$_SESSION["username"];
+	$sql_select = "SELECT * FROM shipping_address WHERE Username = '$tempname'";
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result))
 	{
 
-		$output = '<button id="'.$row['shippingID'].'"style="display:block;" value="'.$row['shippingID'].' type="button" onclick="setAddress(\''.$row['shipping_address'].'\')">'.$row['shipping_address'].'</button>';
+		$output = '<button id="'.$row['shipping_ID'].'"style="display:block;" value="'.$row['shipping_ID'].' type="button" onclick="setAddress(\''.$row['shipping_address'].'\')">'.$row['shipping_address'].'</button>';
 		print $output;
 	}
 }
 function getBillInfo()
 {
-	$sql_select = "SELECT * FROM credit_card_hotlist WHERE Username = '"."zhangzhenlin"."'";
+$tempname=$_SESSION["username"];
+	$sql_select = "SELECT * FROM credit_card_hotlist WHERE Username = '$tempname'";
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result))
 	{
