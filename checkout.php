@@ -1,27 +1,31 @@
 <?php
-// include "./mysql.php";
-// session_start();
+include "mysql.php";
+include "cart_add.php";
+session_start();
+
 $con = mysql_connect("localhost","root","toor");
 if (!$con)
 	{
 		die('Could not connect: ' . mysql_error());
 	}
 mysql_select_db("ruhungry", $con);
-$tempname="zhangzhenlin";
+$tempname=$_SESSION["username"];
 function getAddressInfo()
 {	
-	$sql_select = "SELECT * FROM shipping_address WHERE Username = '"."zhangzhenlin"."'";
+$tempname=$_SESSION["username"];
+	$sql_select = "SELECT * FROM shipping_address WHERE Username = '$tempname'";
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result))
 	{
 
-		$output = '<button id="'.$row['shippingID'].'"style="display:block;" value="'.$row['shippingID'].' type="button" onclick="setAddress(\''.$row['shipping_address'].'\')">'.$row['shipping_address'].'</button>';
+		$output = '<button id="'.$row['shipping_ID'].'"style="display:block;" value="'.$row['shipping_ID'].' type="button" onclick="setAddress(\''.$row['shipping_address'].'\')">'.$row['shipping_address'].'</button>';
 		print $output;
 	}
 }
 function getBillInfo()
 {
-	$sql_select = "SELECT * FROM credit_card_hotlist WHERE Username = '"."zhangzhenlin"."'";
+$tempname=$_SESSION["username"];
+	$sql_select = "SELECT * FROM credit_card_hotlist WHERE Username = '$tempname'";
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result))
 	{
@@ -60,6 +64,10 @@ function getBillInfo()
 
 <body>
 	<script type="text/javascript">
+	function pay()
+	{
+		
+	}
 	function setAddress(Adres)
 	{
 		var Address=Adres.split('| |',7);
@@ -350,7 +358,11 @@ function getBillInfo()
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+					<?php 
+							$username = $_SESSION['username'];
+							checkCart($username);
+					?>
+						<!-- <tr>
 							<td class="cart_product">
 								<a href=""><img src="images/cart/one.png" alt=""></a>
 							</td>
@@ -448,12 +460,13 @@ function getBillInfo()
 									</tr>
 								</table>
 							</td>
-						</tr>
+						</tr> -->
 					</tbody>
 				</table>
 			</div>
 			<div class="payment-options">
-					<span>
+				<button id="btn_pay" name="btn_pay" onclick="pay()" >PAY</button>
+					<!-- <span>
 						<label><input type="checkbox"> Direct Bank Transfer</label>
 					</span>
 					<span>
@@ -461,8 +474,8 @@ function getBillInfo()
 					</span>
 					<span>
 						<label><input type="checkbox"> Paypal</label>
-					</span>
-				</div>
+					</span> -->
+			</div>
 		</div>
 		</div>
 	</section> <!--/#cart_items-->

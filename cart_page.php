@@ -1,7 +1,9 @@
 <!--this is page for loading all the items in one restaurant -->
 
-<?php	
+<?php
+	//this function will handle the post method and store the form into cart database
 	include "cart_add.php";
+
 ?>
 
 <!DOCTYPE html>

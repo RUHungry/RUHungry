@@ -2,7 +2,7 @@
 	//this function will handle the post method and store the form into cart database
 	include "mysql.php";
 	session_start();
-	
+
 	function addCart(){
 		if(isset($_POST)){
 			$username = $_POST["username"];
