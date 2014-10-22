@@ -3,6 +3,7 @@
 <?php
 	//this function will handle the post method and store the form into cart database
 	include "cart_add.php";
+	//bool setcookie ( string $name [, string $value [, int $expire = 0 [, string $path [, string $domain [, bool $secure = false [, bool $httponly = false ]]]]]] )
 
 ?>
 
@@ -76,55 +77,18 @@
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
 							<td></td>
+							<td></td>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-							//$username ="chenlongjiu";
-							//echo "hello";
+							
 							$username = $_SESSION['username'];
 							checkCart($username);
-							//$db_host    = "localhost:8889"; #change your port the mysql running port. 
-						    //$db_username= "root";# change the user name 
-						    //$db_password= "root";# change the user password
-						    //$db_database= "ruhungry";
-						 
-						    //$db = mysql_connect($db_host, $db_username, $db_password, $db_database);
-							//$sql_select = "select username, shopping_cart_info.item_id, shopping_cart_info.restrt_id, shopping_cart_info.quantity, inventory_info.price from shopping_cart_info left join inventory_info on shopping_cart_info.item_id = inventory_info.item_id where username =\"chenlongjiu\";";
 							
-
-							/*while($row = mysqli_fetch_array($result)){
-								//print html form of the shopping cart
-								$outputlist = "";
-								$outputlist.= '<tr>';
-								$outputlist.= '<td class="cart_product">';
-								$outputlist.= '<h4><a href="">'.$row["restrt_id"].'</a></h4>'
-								$outputlist.= '</td>';
-								$outputlist.= '<td class="cart_description">';
-								$outputlist.= '<p>'.$row["item_id"].'</p>';
-								$outputlist.= '</td>';
-								$outputlist.= '<td class="cart_price">';
-								$outputlist.= '<p>'.$row["price"].'</p>';
-								$outputlist.= '</td>';
-								$outputlist.= '<td class="cart_quantity">';
-								$outputlist.= '<div class="cart_quantity_button">';
-								$outputlist.= '<a class="cart_quantity_up" href=""> . </a>';
-								$outputlist.= '<input class="cart_quantity_input" type="text" name="quantity" value="'.$row["quality"].'" autocomplete="off" size="2" kl_vkbd_parsed="true">';
-								$outputlist.= '<a class="cart_quantity_down" href=""> - </a>';
-								$outputlist.= '</div>';
-								$outputlist.= '</td>';
-								$outputlist.= '<td class="cart_total">';
-								$outputlist.= '<p class="cart_total_price">'.$row["price"]*$row["quality"].'</p>';
-								$outputlist.= '</td>';
-								$outputlist.= '<td class="cart_delete">';
-								$outputlist.= '<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>';
-								$outputlist.= '</td>';
-								$outputlist.= '</tr>';
-								
-								print $outputlist;
-							}*/
 						?>
 					</tbody>
+
 				</table>
 			</div>
 		</div>

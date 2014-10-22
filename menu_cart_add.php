@@ -3,23 +3,43 @@
 	session_start();
 	
 	if($_SESSION["islogin"] != true)
-	header("Location: login.php");
+		header("Location: login.php");
 	else
 	{
-	$restrt_id =$_POST["Restrt_ID"];
-	//header("Location:cart_page.php");
-	//include "cart_add.php";
-
-	//include "cart_page.php";
-	//echo "sb";
-	$username =  $_POST["Username"];
-	$item_id = $_POST["Item_ID"];
+		
+		$restrt_id =$_POST["Restrt_ID"];
+		header("Location: menu_page.php?Restrt_Type=$restrt_id");
+		
+		$username =  $_POST["Username"];
+		$item_id = $_POST["Item_ID"];
 	
-	$quantity =$_POST["Quantity"];
-	$sql='insert into shopping_cart_info (Username, Item_ID, Restrt_ID, Quantity) values("'.$username.'", '.$item_id.', '.$restrt_id.','.$quantity.')';
-	//echo $sql;
-	$insert_check = mysql_query($sql) or die(mysql_error());
-	header("Location: menu_page.php?Restrt_Type=$restrt_id");
+		$quantity =$_POST["Quantity"];
+		
+		//echo $quantity;
+		if($quantity != 0){
+			
+			
+			$sql_select = 'select * from shopping_cart_info where Username ="'.$username.'" and Item_ID ='.$item_id.' and Restrt_ID ='.$restrt_id.';';
+			$sql_insert='insert into shopping_cart_info (Username, Item_ID, Restrt_ID, Quantity) values("'.$username.'", '.$item_id.', '.$restrt_id.','.$quantity.')';
+			$result = mysql_query($sql_select);
+			$row_number = mysql_num_rows($result);
+			$row = mysql_fetch_array($result);
+			$sql_update = 'update shopping_cart_info set Quantity = '.($quantity+$row["Quantity"]).';';
+			
+			if( $row_number != 0){
+				
+				$result = mysql_query($sql_select);
+				
+				$insert_check = mysql_query($sql_update) or die(mysql_error());
+			}else{
+				
+				$insert_check = mysql_query($sql_insert) or die(mysql_error());
+			}
+			
+			
+		}
+		
+		
 	}
 ?>
 
