@@ -63,7 +63,7 @@ session_start();
 						<div class="search_box pull-right">
 							<form action="index.php" method="POST" >
 								<input name="search" type="text" placeholder="Search"/>
-								<button class="submit btn btn-default">Search</button>
+								<button class="submit btn btn-warning">Search</button>
 							</form>
 						</div>
 					</div>
