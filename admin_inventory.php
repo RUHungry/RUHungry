@@ -132,7 +132,7 @@ if (!empty($tab))
 		</div><!--/header_top-->
 		
 		<div class="header-middle">
-		<div class="container">
+			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
@@ -151,7 +151,7 @@ if (!empty($tab))
 					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 		<div class="header-bottom">		
 			<div class="container">	
 				<div class="row">			
