@@ -133,11 +133,16 @@ CREATE TABLE purchase_alerts (
   Username VARCHAR(50) NOT NULL,
   Alert_Info VARCHAR(150) NULL,
   Alert_Time DATETIME NULL,
-  Hotlist_ID INT NOT NULL,
   IP_Record VARCHAR(50) NULL,
+  First_Name VARCHAR(30) NULL,
+  Last_Name VARCHAR(30) NULL,
+  Email VARCHAR(50) NULL,
+  shipping_address VARCHAR(200) NULL,
+  Card_Account VARCHAR(50) NULL,
+  Card_Holder VARCHAR(50) NULL,  
   PRIMARY KEY (Alert_ID),
-  FOREIGN key (Username) references customer_info (Username),
-  FOREIGN key (Hotlist_ID) references credit_card_hotlist (Hotlist_ID));
+  FOREIGN key (Username) references customer_info (Username));
+
   
 #Create shipping_address table
 DROP TABLE IF EXISTS shipping_address;
@@ -203,7 +208,7 @@ INSERT INTO checkout_info (Username, Item_ID, Restrt_ID, Card_ID, Shipping_Addre
 INSERT INTO checkout_info (Username, Item_ID, Restrt_ID, Card_ID, Shipping_Address, Checkout_Date, Price) VALUES('zhangzhenlin', '2', '1', '4', '1111 Pentagon', '2014-10-04 15:09:00', '32.21');
 
 #purchase_alerts test data
-INSERT INTO purchase_alerts (Alert_Info, Alert_Time, Hotlist_ID, IP_Record) VALUES('Verification Failed', '2014-10-04 13:09:00', '4', '122.21.10.76');
-INSERT INTO purchase_alerts (Alert_Info, Alert_Time, Hotlist_ID, IP_Record) VALUES('Transfer Failed', '2014-10-05 11:45:00', '1', '112.17.102.19');
-INSERT INTO purchase_alerts (Alert_Info, Alert_Time, Hotlist_ID, IP_Record) VALUES('Transfer Failed', '2014-10-05 21:12:00', '2', '107.54.12.87');
+INSERT INTO purchase_alerts (Alert_Info, Alert_Time, IP_Record, Username) VALUES('Verification Failed', '2014-10-04 13:09:00', '122.21.10.76', 'lintianlang');
+INSERT INTO purchase_alerts (Alert_Info, Alert_Time, IP_Record, Username) VALUES('Transfer Failed', '2014-10-05 11:45:00', '112.17.102.19', 'lintianlang');
+INSERT INTO purchase_alerts (Alert_Info, Alert_Time, IP_Record, Username) VALUES('Transfer Failed', '2014-10-05 21:12:00', '107.54.12.87', 'daierzheng');
 
