@@ -35,7 +35,15 @@ define("PHPGRID_LIBPATH",dirname(__FILE__).DIRECTORY_SEPARATOR."lib".DIRECTORY_S
 // include and create object
 include(PHPGRID_LIBPATH."inc/jqgrid_dist.php");
 
-
+	//$g = new jqgrid();
+	// set few params
+   // $grid["caption"] = ""; 
+	//$grid["autowidth"] = true; 
+	//$g->set_options($grid);
+	// set database table for CRUD operations
+	//$g->table = "restaurant_info"; 
+	//$out = $g->render("list1");
+	
 // preserve selection for ajax call
 if (!empty($_POST["tables"]))
 {
@@ -50,9 +58,9 @@ if (!empty($_GET["grid_id"]))
 if (!empty($tab))
 {
 	$g = new jqgrid();
-
+	$grid["caption"] = "'$tab'";
 	// set few params
-	$grid["caption"] = "Grid for '$tab'";
+	
 	$grid["autowidth"] = true;
 	$g->set_options($grid);
 
@@ -181,7 +189,7 @@ if (!empty($tab))
 						</select>
 					</div>
 					<div class="col-sm-1">
-						<input type="submit" class="btn btn-warning" value="Load">
+						<input type="submit" class="btn btn-warning" value="Load" >
 					</div>
 				</form>
 				</div>
@@ -189,7 +197,7 @@ if (!empty($tab))
 		</div>
 
 	</header>
-	
+
 	<div class="container">
 	<?php if (!empty($out)) { ?>
 		<div class="col-sm-12">				
@@ -203,7 +211,25 @@ if (!empty($tab))
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10">
+						<div class="companyinfo">
+							<h2><span>RUH</span>ungry</h2>
+							<p>CS6548 E-Commerce</p>
+						</div>
+					</div>					
+					<div class="col-sm-2">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!--/Footer-->
 </body>
+
 </html>

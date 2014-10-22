@@ -156,7 +156,10 @@ if (isset($_POST['submit']))
 								  </tr>
 							   </tbody>
 							</table>
-							<div class="container" style="padding-top:50px; display:none;" id="div_edit">
+							<div class="container" style="padding-top:50px; padding-bottom:270px;" id="div_blank">
+							
+							</div>
+							<div class="container" style="padding-top:50px; padding-bottom:100px; display:none;" id="div_edit">
 								<div class="row">
 									<div class="col-sm-8">
 										<div class="login-form"><!--login form-->
@@ -168,13 +171,7 @@ if (isset($_POST['submit']))
 												<input type="text" name="exp_date" placeholder="Expire Date" required="required">
 												<input type="text" name="address" placeholder="Billing Address" required="required">
 												<button type="submit" value="submit" name="submit" class="btn btn-default">Submit</button>
-											</form>
-											<br>
-											<br>
-											<br>
-											<br>
-											<br>
-											<br>
+											</form>											
 										</div><!--/login form-->
 									</div>							
 <!-- 							<div class="form-one" style="display:none" id="div_edit">
@@ -191,10 +188,30 @@ if (isset($_POST['submit']))
 		</div>
 		</div>
 	</section>
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10">
+						<div class="companyinfo">
+							<h2><span>RUH</span>ungry</h2>
+							<p>CS6548 E-Commerce</p>
+						</div>
+					</div>					
+					<div class="col-sm-2">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!--/Footer-->
 	<script>
 		function add_edit()
 		{
 			document.getElementById("div_edit").style.display = "block";
+			document.getElementById("div_blank").style.display = "none";
 		}
 	</script>
 </body>
