@@ -203,9 +203,9 @@ INSERT INTO credit_card_hotlist (Username, Card_Account, Card_Type, Card_Holder,
 INSERT INTO credit_card_hotlist (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('zhangzhenlin', '0000012345678904', 'visa', 'Zhenlin Zhang', '2018-06-05 00:00:00', '1900 S Eads St, Arlington, VA 22202');
 
 #checkout_info test data
-INSERT INTO checkout_info (Username, Item_ID, Restrt_ID, Card_ID, Shipping_Address, Checkout_Date, Price) VALUES('zhangzhenlin', '1', '1', '4', '1111 Pentagon',  '2014-10-05 20:10:00', '23.21');
-INSERT INTO checkout_info (Username, Item_ID, Restrt_ID, Card_ID, Shipping_Address, Checkout_Date, Price) VALUES('zhangzhenlin', '2', '1', '4', '1111 Pentagon', '2014-10-03 12:13:00', '12.21');
-INSERT INTO checkout_info (Username, Item_ID, Restrt_ID, Card_ID, Shipping_Address, Checkout_Date, Price) VALUES('zhangzhenlin', '2', '1', '4', '1111 Pentagon', '2014-10-04 15:09:00', '32.21');
+INSERT INTO checkout_info (Order_ID, Username, Item_ID, Restrt_ID, Card_ID, Shipping_Address, Checkout_Date, Price) VALUES('0001', 'zhangzhenlin', '1', '1', '4', '1111 Pentagon',  '2014-10-05 20:10:00', '23.21');
+INSERT INTO checkout_info (Order_ID, Username, Item_ID, Restrt_ID, Card_ID, Shipping_Address, Checkout_Date, Price) VALUES('0002', 'zhangzhenlin', '2', '1', '4', '1111 Pentagon', '2014-10-03 12:13:00', '12.21');
+INSERT INTO checkout_info (Order_ID, Username, Item_ID, Restrt_ID, Card_ID, Shipping_Address, Checkout_Date, Price) VALUES('0003', 'zhangzhenlin', '2', '1', '4', '1111 Pentagon', '2014-10-04 15:09:00', '32.21');
 
 #purchase_alerts test data
 INSERT INTO purchase_alerts (Alert_Info, Alert_Time, IP_Record, Username) VALUES('Verification Failed', '2014-10-04 13:09:00', '122.21.10.76', 'lintianlang');
