@@ -1,6 +1,6 @@
 <?php
 	include "mysql.php";
-	
+	include "get_user_alerts.php";
 	session_start();
 	
 	if($_SESSION["admin"] != true)
@@ -107,8 +107,6 @@ if (!empty($tab))
 <body>
 	<header id="header"><!--header-->
 
-		
-		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
@@ -120,15 +118,16 @@ if (!empty($tab))
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
+								<?php 
+									echo('<li><a href="alerts_page.php">'.get_alert_numbers());
+								?>	
 								<li><a href="logout.php"><i class="fa fa-lock"></i> Logout</a></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div><!--/header-middle-->
-		<div class="header-bottom">
-		<div class="row">
+		<div class="row" style="padding-top:50px;">
 			<div class="container">				
 				<form method="post">
 					<div class="col-sm-9">
@@ -161,7 +160,7 @@ if (!empty($tab))
 				</form>
 			</div>
 		</div>
-	</div>
+
 	</header>
 	
 	<div class="container">

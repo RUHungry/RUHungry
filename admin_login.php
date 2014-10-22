@@ -6,8 +6,9 @@ require('./mysql.php');
 session_start();
 
 //Check if there is a login seesion
-/*if($_SESSION["admin"] == true)
-
+if($_SESSION["admin"] == true)
+	header("Location: admin_inventory.php");
+/*
 //if there is, login and direct to the inventory page
 {
 	$username = $_SESSION["username"];

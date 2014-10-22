@@ -7,9 +7,10 @@ include "jqgrid_dist.php";
 
 session_start();
 
-if($_SESSION["islogin"] != true)
-	header("Location: login.php");
-
+if($_SESSION["admin"] != true)
+	header("Location: admin_login.php");
+else
+{
 // update on ajax call
 
 	$g = new jqgrid();
@@ -31,7 +32,7 @@ if($_SESSION["islogin"] != true)
 						  					  
 	// render grid
 	$out = $g->render("list1");
-
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html lang="en">
@@ -78,12 +79,8 @@ if($_SESSION["islogin"] != true)
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="checkout.php"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart_page.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<?php if($_SESSION["islogin"] == true) echo('<li><a href="logout.php"><i class="fa fa-lock"></i> Logout</a></li>');
-									  else echo('<li><a href="login.php"><i class="fa fa-lock"></i> Login</a></li>');
-								?>								
+								<li><a href="admin_inventory.php"><i class="fa fa-user"></i> Database Management</a></li>								
+								<li><a href="logout.php"><i class="fa fa-lock"></i> Logout</a></li>								
 							</ul>
 						</div>
 					</div>
