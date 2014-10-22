@@ -43,11 +43,7 @@ session_start();
 					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
-							<ul class="nav navbar-nav">
-								<?php if($_SESSION["islogin"] == true) 
-								{echo('<li><a href="alerts_page.php">'.get_alert_numbers());}
-								else{}
-								?>							
+							<ul class="nav navbar-nav">						
 								<li><a href="profile_shipping_addr.php"><i class="fa fa-user"></i> Account</a></li>
 								<li><a href="checkout.php"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart_page.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
