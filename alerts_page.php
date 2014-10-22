@@ -1,10 +1,39 @@
 <?php
-include "get_user_alerts.php";
+
+include "mysql.php";
+
+// include and create object
+include "jqgrid_dist.php";
+
 session_start();
 
-?>
+if($_SESSION["islogin"] != true)
+	header("Location: login.php");
 
-<!DOCTYPE html>
+// update on ajax call
+
+	$g = new jqgrid();
+
+	// set few params
+/*	$grid["caption"] = "Grid for '$tab'"; */
+	$grid["autowidth"] = true;
+	$grid["sortname"] = 'Alert_Time'; 
+	$grid["sortorder"] = "desc"; 
+	$g->set_options($grid);
+	$ops["edit"] = false;
+	$g->set_actions($ops);
+	// set database table for CRUD operations
+	$g->table = "purchase_alerts"; /*
+	$g->select_command = "select Alert_ID, purchase_alerts.Username, First_Name, Last_Name, Email, shipping_address, IP_Record, Card_Holder, Card_Account, Alert_Info, Alert_Time, display_flag
+						  from purchase_alerts left join customer_info on purchase_alerts.Username = customer_info.Username 
+						  left join shipping_address on purchase_alerts.Username = shipping_address.Username
+						  left join credit_card_info on purchase_alerts.Username = credit_card_info.Username where display_flag = 1"; */
+						  					  
+	// render grid
+	$out = $g->render("list1");
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -19,6 +48,8 @@ session_start();
     <link href="css/animate.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.custom.css"></link>	
+	<link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid.css"></link>		
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -28,95 +59,51 @@ session_start();
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+	<script src="js/grid.locale-en.js" type="text/javascript"></script>
+	<script src="js/jquery.jqGrid.min.js" type="text/javascript"></script>	
+	<script src="js/jquery-ui.custom.min.js" type="text/javascript"></script>
+	
 </head><!--/head-->
-
 <body>
-	<header id="header"><!--header-->		
-
-			<div class="container">
-				<div class="row">
+	<header id="header">
+			<div class="container" >
+				<div class="row" >
 					<div class="col-sm-4">
 						<div class="logo pull-left">
 							<a href="index.php"><img src="images/home/mylogo.png" alt="" /></a>
 						</div>
-						
 					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<?php if($_SESSION["islogin"] == true) 
-								{echo('<li><a href="alerts_page.php">'.get_alert_numbers());}
-								else{}
-								?>							
-								<li><a href="profile_shipping_addr.php"><i class="fa fa-user"></i> Account</a></li>
+								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
 								<li><a href="checkout.php"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart_page.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<?php if($_SESSION["islogin"] == true) echo('<li><a href="logout.php"><i class="fa fa-lock"></i> Logout</a></li>');
 									  else echo('<li><a href="login.php"><i class="fa fa-lock"></i> Login</a></li>');
-								?>
+								?>								
 							</ul>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-3 pull-right">
-						<div class="search_box pull-right">
-							<form action="index.php" method="POST" >
-								<input name="search" type="text" placeholder="Search"/>
-								<button class="submit btn btn-default">Search</button>
-							</form>
-						</div>
-					</div>
-				</div>				
 			</div>
+	</header>
 
-	</header><!--/header-->
-		
 	<section>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-3">
-					<div class="left-sidebar">
-						<h2>Category</h2>
-						<div class="panel-group category-products" id="accordian">
-							<?php
-								include "restaurant_catagory_filter.php";
-								
-									$_SERVER["QUERY_STRING"];
-									$RestrtType = $_GET["Restrt_Type"];
-									restaurantType($RestrtType);								
-							?>							
-						</div>				
-					</div>
-				</div>
-				
-				<div class="col-sm-9 padding-right">
-					<div class="restaurant list">
-						<h2 class="title text-center">RESTAURANT LIST</h2>
-						<?php						 	
-							include "restaurant_get.php";
-							$search = $_POST["search"];
-							
-							$_SERVER["QUERY_STRING"];
-							if($search==""){	
-								$RestrtType = $_GET["Restrt_Type"];
-								homepageRestaurantInfo($RestrtType);
-							}else{
-								homepageRestaurantSearch($search);
-							}									
-						?>					
-					</div>					
-				</div>
-			</div>
+	<div class="container" style="padding-top:50px;">
+		<div class="row">
+			
+			<?php if (!empty($out)) { ?>
+			<br>
+			<fieldset>
+				<?php echo $out?>
+			</fieldset>	
+			<?php } ?>
 		</div>
+	</div>
 	</section>
 	
-  
-    <script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
 </body>
 </html>

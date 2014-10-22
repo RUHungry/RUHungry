@@ -83,9 +83,9 @@ CREATE TABLE shopping_cart_info (
   FOREIGN key (Item_ID) references inventory_info(Item_ID),
   FOREIGN key (Restrt_ID) references restaurant_info(Restrt_ID));
  
-#Create credit_card_hotlist table
-DROP TABLE IF EXISTS credit_card_hotlist;
-CREATE TABLE credit_card_hotlist (
+#Create credit_card_info table
+DROP TABLE IF EXISTS credit_card_info;
+CREATE TABLE credit_card_info (
   Card_ID INT NOT NULL AUTO_INCREMENT,
   Username VARCHAR(50) NULL,
   Card_Account VARCHAR(50) NULL,
@@ -95,7 +95,20 @@ CREATE TABLE credit_card_hotlist (
   Bill_Address VARCHAR(150) NULL,
   PRIMARY KEY (Card_ID),
   FOREIGN key (Username) references customer_info (Username));
- 
+
+#Create credit_card_hotlist table
+DROP TABLE IF EXISTS credit_card_hotlist;
+CREATE TABLE credit_card_hotlist (
+  Hotlist_ID INT NOT NULL AUTO_INCREMENT,
+  Username VARCHAR(50) NULL,
+  Card_Account VARCHAR(50) NULL,
+  Card_Type VARCHAR(15) NULL,
+  Card_Holder VARCHAR(50) NULL,
+  Card_Expire VARCHAR(50) NULL,
+  Bill_Address VARCHAR(150) NULL,
+  PRIMARY KEY (Hotlist_ID),
+  FOREIGN key (Username) references customer_info (Username));
+  
 #Create checkout_info table
 DROP TABLE IF EXISTS checkout_info;
 CREATE TABLE checkout_info (
@@ -109,7 +122,7 @@ CREATE TABLE checkout_info (
   Price FLOAT NULL,
   PRIMARY KEY (Order_ID),
   FOREIGN key (Username) references customer_info (Username),
-  FOREIGN key (Card_ID) references credit_card_hotlist (Card_ID),
+  FOREIGN key (Card_ID) references credit_card_info (Card_ID),
   FOREIGN key (Item_ID) references inventory_info (Item_ID),
   FOREIGN key (Restrt_ID) references restaurant_info (Restrt_ID));
  
@@ -117,12 +130,14 @@ CREATE TABLE checkout_info (
 DROP TABLE IF EXISTS purchase_alerts;
 CREATE TABLE purchase_alerts (
   Alert_ID INT NOT NULL AUTO_INCREMENT,
+  Username VARCHAR(50) NOT NULL,
   Alert_Info VARCHAR(150) NULL,
   Alert_Time DATETIME NULL,
-  Card_ID INT NOT NULL,
+  Hotlist_ID INT NOT NULL,
   IP_Record VARCHAR(50) NULL,
   PRIMARY KEY (Alert_ID),
-  FOREIGN key (Card_ID) references credit_card_hotlist (Card_ID));
+  FOREIGN key (Username) references customer_info (Username),
+  FOREIGN key (Hotlist_ID) references credit_card_hotlist (Hotlist_ID));
   
 #Create shipping_address table
 DROP TABLE IF EXISTS shipping_address;
@@ -132,6 +147,8 @@ CREATE TABLE shipping_address (
   Username VARCHAR(50) NOT NULL,
   PRIMARY KEY (shipping_ID),
   FOREIGN KEY (Username) references customer_info (Username));
+  
+
 
 
 #######################
@@ -168,6 +185,12 @@ INSERT INTO shopping_cart_info (Username , Item_ID , Restrt_ID , Quantity) VALUE
 INSERT INTO shopping_cart_info (Username , Item_ID , Restrt_ID , Quantity) VALUES ('chenlongjiu', 3, 1, 1);
 INSERT INTO shopping_cart_info (Username , Item_ID , Restrt_ID , Quantity) VALUES ('daierzheng', 1, 1, 1);
 
+# credit_card_info test data
+INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('lintianlang', '0000012345678901', 'visa', 'Tianlang Lin', '2018-10-05 00:00:00', '1400 S Joyce St, Arlington, VA 22202');
+INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('chenlongjiu', '0000012345678902', 'visa', 'Longjiu Chen', '2018-09-05 00:00:00', '1500 S Joyce St, Arlington, VA 22202');
+INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('daierzheng', '0000012345678903', 'visa', 'Erzheng Dai', '2018-07-05 00:00:00', '1700 S Eads St, Arlington, VA 22202');
+INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('zhangzhenlin', '0000012345678904', 'visa', 'Zhenlin Zhang', '2018-06-05 00:00:00', '1900 S Eads St, Arlington, VA 22202');
+
 # credit_card_hotlist test data
 INSERT INTO credit_card_hotlist (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('lintianlang', '0000012345678901', 'visa', 'Tianlang Lin', '2018-10-05 00:00:00', '1400 S Joyce St, Arlington, VA 22202');
 INSERT INTO credit_card_hotlist (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('chenlongjiu', '0000012345678902', 'visa', 'Longjiu Chen', '2018-09-05 00:00:00', '1500 S Joyce St, Arlington, VA 22202');
@@ -180,8 +203,7 @@ INSERT INTO checkout_info (Username, Item_ID, Restrt_ID, Card_ID, Shipping_Addre
 INSERT INTO checkout_info (Username, Item_ID, Restrt_ID, Card_ID, Shipping_Address, Checkout_Date, Price) VALUES('zhangzhenlin', '2', '1', '4', '1111 Pentagon', '2014-10-04 15:09:00', '32.21');
 
 #purchase_alerts test data
-INSERT INTO purchase_alerts (Alert_Info, Alert_Time, Card_ID, IP_Record) VALUES('Verification Failed', '2014-10-04 13:09:00', '4', '122.21.10.76');
-INSERT INTO purchase_alerts (Alert_Info, Alert_Time, Card_ID, IP_Record) VALUES('Transfer Failed', '2014-10-05 11:45:00', '1', '112.17.102.19');
-INSERT INTO purchase_alerts (Alert_Info, Alert_Time, Card_ID, IP_Record) VALUES('Transfer Failed', '2014-10-05 21:12:00', '2', '107.54.12.87');
-
+INSERT INTO purchase_alerts (Alert_Info, Alert_Time, Hotlist_ID, IP_Record) VALUES('Verification Failed', '2014-10-04 13:09:00', '4', '122.21.10.76');
+INSERT INTO purchase_alerts (Alert_Info, Alert_Time, Hotlist_ID, IP_Record) VALUES('Transfer Failed', '2014-10-05 11:45:00', '1', '112.17.102.19');
+INSERT INTO purchase_alerts (Alert_Info, Alert_Time, Hotlist_ID, IP_Record) VALUES('Transfer Failed', '2014-10-05 21:12:00', '2', '107.54.12.87');
 
