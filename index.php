@@ -98,7 +98,7 @@ session_start();
 	</header><!--/header-->
 		
 	<section>
-		<div class="container">
+		<div class="container" style="padding-bottom:250px;">
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
@@ -135,7 +135,26 @@ session_start();
 			</div>
 		</div>
 	</section>
-	
+
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10">
+						<div class="companyinfo">
+							<h2><span>RUH</span>ungry</h2>
+							<p>CS6548 E-Commerce</p>
+						</div>
+					</div>					
+					<div class="col-sm-2">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!--/Footer-->
   
     <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>

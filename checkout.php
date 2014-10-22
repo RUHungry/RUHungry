@@ -64,9 +64,28 @@ $tempname=$_SESSION["username"];
 
 <body>
 	<script type="text/javascript">
-	function pay()
+	function finalReview()
 	{
-		
+					document.getElementById("fr_Ship_First_Name").value=document.getElementById("Ship_First_Name").value;
+					document.getElementById("fr_Ship_Last_Name").value=document.getElementById("Ship_Last_Name").value;
+					document.getElementById("fr_Ship_Address1").value=document.getElementById("Ship_Address1").value;
+					document.getElementById("fr_Ship_Address2").value=document.getElementById("Ship_Address2").value;
+					document.getElementById("fr_Ship_City").value=document.getElementById("Ship_City").value;
+					document.getElementById("fr_Ship_State").value=document.getElementById("Ship_State").value;
+					document.getElementById("fr_Ship_Zip").value=document.getElementById("Ship_Zip").value;
+					document.getElementById("fr_Bill_First_Name").value=document.getElementById("Bill_First_Name").value;
+					document.getElementById("fr_Bill_Last_Name").value=document.getElementById("Bill_Last_Name").value;
+					document.getElementById("fr_Bill_Address1").value=document.getElementById("Bill_Address1").value;
+					document.getElementById("fr_Bill_Address2").value=document.getElementById("Bill_Address2").value;
+					document.getElementById("fr_Bill_City").value=document.getElementById("Bill_City").value;
+					document.getElementById("fr_Bill_State").value=document.getElementById("Bill_State").value;
+					document.getElementById("fr_Bill_Zip").value=document.getElementById("Bill_Zip").value;
+					document.getElementById("fr_Bill_Type").value=document.getElementById("Bill_Type").value;
+					document.getElementById("fr_Bill_Number").value=document.getElementById("Bill_Number").value;
+					document.getElementById("fr_Bill_Holder").value=document.getElementById("Bill_Holder").value;
+					document.getElementById("fr_Bill_Expire").value=document.getElementById("Bill_Expire").value;
+		window.location.href("orderConfirm.php");
+		// window.navigate("orderConfirm.php")
 	}
 	function setAddress(Adres)
 	{
@@ -465,16 +484,36 @@ $tempname=$_SESSION["username"];
 				</table>
 			</div>
 			<div class="payment-options">
-				<button id="btn_pay" name="btn_pay" onclick="pay()" >PAY</button>
-					<!-- <span>
-						<label><input type="checkbox"> Direct Bank Transfer</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Check Payment</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Paypal</label>
-					</span> -->
+				<form id="fr_Info" action="orderConfirm.php" method="POST">
+					<button id="btn_fr" name="btn_fr" onclick="finalReview()" >Final Review</button>
+					<input id="fr_Ship_First_Name" name="fr_Ship_First_Name" type="hidden">
+					<input id="fr_Ship_Last_Name" name="fr_Ship_Last_Name" type="hidden">
+					<input id="fr_Ship_Address1" name="fr_Ship_Address1" type="hidden">
+					<input id="fr_Ship_Address2" name="fr_Ship_Address2" type="hidden">
+					<input id="fr_Ship_City" name="fr_Ship_City" type="hidden">
+					<input id="fr_Ship_State" name="fr_Ship_State" type="hidden">
+					<input id="fr_Ship_Zip" name="fr_Ship_Zip" type="hidden">
+					<input id="fr_Bill_First_Name" name="fr_Bill_First_Name" type="hidden">
+					<input id="fr_Bill_Last_Name" name="fr_Bill_Last_Name" type="hidden">
+					<input id="fr_Bill_Address1" name="fr_Bill_Address1" type="hidden">
+					<input id="fr_Bill_Address2" name="fr_Bill_Address2" type="hidden">
+					<input id="fr_Bill_City" name="fr_Bill_City" type="hidden">
+					<input id="fr_Bill_State" name="fr_Bill_State" type="hidden">
+					<input id="fr_Bill_Zip" name="fr_Bill_Zip" type="hidden">
+					<input id="fr_Bill_Type" name="fr_Bill_Type" type="hidden">
+					<input id="fr_Bill_Number" name="fr_Bill_Number" type="hidden">
+					<input id="fr_Bill_Holder" name="fr_Bill_Holder" type="hidden">
+					<input id="fr_Bill_Expire" name="fr_Bill_Expire" type="hidden">
+						<!-- <span>
+							<label><input type="checkbox"> Direct Bank Transfer</label>
+						</span>
+						<span>
+							<label><input type="checkbox"> Check Payment</label>
+						</span>
+						<span>
+							<label><input type="checkbox"> Paypal</label>
+						</span> -->
+				</form>
 			</div>
 		</div>
 		</div>
