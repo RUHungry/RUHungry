@@ -130,6 +130,7 @@ if (!empty($tab))
 				</div>
 			</div>
 		</div><!--/header_top-->
+		
 		<div class="header-middle">
 		<div class="container">
 				<div class="row">
