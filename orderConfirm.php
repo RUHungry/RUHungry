@@ -19,6 +19,7 @@ date_default_timezone_set('UTC');
 			left join inventory_info on shopping_cart_info.Item_ID = inventory_info.Item_ID left join restaurant_info on shopping_cart_info.Restrt_ID = restaurant_info.Restrt_ID where Username ="'.$username.'"';
 			$result = mysql_query($sql_select) or die("sql error!");
 			$time = date('ymdhis',time());
+			$txt = "Order Information\n";
 			while($row = mysql_fetch_array($result))
 			{
 				$total=($row[Price]*$row[Quantity]);
@@ -27,8 +28,17 @@ date_default_timezone_set('UTC');
 				('$time_$username','$username','$row[Item_ID]','$row[Item_ID]','$_POST[op_Bill_Number]','$_POST[op_Ship_First_Name]| |$_POST[op_Ship_Last_Name]| |$_POST[op_Ship_Address1]| |$_POST[op_Ship_Address2]| |$_POST[op_Ship_City]| |$_POST[op_Ship_State]| |$_POST[op_Ship_Zip]','$time','$total')";
 			if (!mysql_query($sql_insert,$con))
 					die('Error: ' . mysql_error());
+				$txt.=$sql_insert;
+				$txt.="\n\n";
 			}
+			$myfile = fopen("orders/".$time_.$username, "w")or die("Unable to create file!");
+
+			fwrite($myfile, $txt);
+			$txt = "Order Ends\n";
+			fwrite($myfile, $txt);
+			fclose($myfile);
 			echo "<script> alert('Success!');   window.location.href('index.php');</script>";
+
 		}
 
 
