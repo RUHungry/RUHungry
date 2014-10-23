@@ -2,9 +2,18 @@
 	include "mysql.php";
 	session_start();
 	
-	if($_SESSION["islogin"] != true)
+	if($_SESSION["islogin"] != true){
 		header("Location: login.php");
-	else
+		$restrt_id =$_POST["Restrt_ID"];
+		$username =  $_POST["Username"];
+		$item_id = $_POST["Item_ID"];
+		$quantity =$_POST["Quantity"];
+		if(isset($cookie_ID)){
+			$cookie_ID ++;
+
+
+		}
+	}else
 	{
 		
 		$restrt_id =$_POST["Restrt_ID"];
@@ -24,7 +33,7 @@
 			$result = mysql_query($sql_select);
 			$row_number = mysql_num_rows($result);
 			$row = mysql_fetch_array($result);
-			$sql_update = 'update shopping_cart_info set Quantity = '.($quantity+$row["Quantity"]).';';
+			$sql_update = 'update shopping_cart_info set Quantity = '.($quantity+$row["Quantity"]).' where  Username ="'.$username.'" and Item_ID ='.$item_id.' and Restrt_ID ='.$restrt_id.';';
 			
 			if( $row_number != 0){
 				
