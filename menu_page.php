@@ -1,6 +1,7 @@
 <!--this is page for loading all the items in one restaurant -->
 
 <?php	
+	include "mysql.php";
 	include "cart_add.php";
 	session_start();
 	
@@ -151,27 +152,29 @@
 					</tbody>
 				</table>
 			</div>
-								<div class="category-tab shop-details-tab"><!--category-tab-->
+					<div class="category-tab shop-details-tab" style="padding-bottom:50px;"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
-								<li><a href="#details" data-toggle="tab">Details</a></li>
-								<li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
-								<li><a href="#tag" data-toggle="tab">Tag</a></li>
+								<li><a href="#description" data-toggle="tab">Description</a></li>
+								
 								<li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
 							</ul>
 						</div>
-						<div class="tab-content">
-							<div class="tab-pane fade" id="details" >
-				
+						<div class="tab-content"  >
+							<div class="tab-pane fade" id="description">
+								<div class="col-sm-12">									
+										<?php											
+											$restrt = mysql_query("select * from restaurant_info where Restrt_ID = ".$restrt_id) or die(mysql_error());
+											while($des = mysql_fetch_array($restrt)){
+											$output .= '<textarea  name=\"description\" readonly=\"readonly\">'.$des['Description'].'</textarea>';
+											print  $output;
+											}
+										?>
+									
+								</div>
 							</div>
 							
-							<div class="tab-pane fade" id="companyprofile" >
-				
-							</div>
-							
-							<div class="tab-pane fade" id="tag" >
-				
-							</div>
+						
 							
 							<div class="tab-pane fade active in" id="reviews" >
 								<div class="col-sm-12">
@@ -195,7 +198,7 @@
 								<div><p>&nbsp</p></div>
 								<div class="panel panel-group" >
 										 <?php
-											include "mysql.php";
+											
 											$select = mysql_query("select * from item_reviews where Restrt_ID = ".$restrt_id) or die(mysql_error());
 											while($info = mysql_fetch_array($select))
 											{
@@ -216,13 +219,9 @@
 											}
 										 ?>							
 								</div>
-							</div>
-							
+							</div>							
 						</div>
-					</div><!--/category-tab-->
-					
-					
-					
+					</div><!--/category-tab-->					
 		</div>
 	</section> <!--/#cart_items-->
 	<footer id="footer"><!--Footer-->

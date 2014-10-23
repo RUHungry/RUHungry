@@ -109,7 +109,32 @@ else
 <body>
 	<div> 
 	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-envelope"></i> URHungry@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
 		
+		<div class="header-middle">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
@@ -119,10 +144,10 @@ else
 					</div>
 				</div>
 			</div>
-
+		</div>
 	</header><!--/header-->
 	
-		<div class="container" style="padding-top:50px;">
+		<div class="container" style="padding-top:50px; padding-bottom:250px;">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-3">
 					<div class="login-form"><!--login form-->
@@ -137,7 +162,25 @@ else
 			</div>
 		</div>
 
-	
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10">
+						<div class="companyinfo">
+							<h2><span>RUH</span>ungry</h2>
+							<p>CS6548 E-Commerce</p>
+						</div>
+					</div>					
+					<div class="col-sm-2">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!--/Footer-->
   
     <script src="js/jquery.js"></script>
 	<script src="js/price-range.js"></script>
