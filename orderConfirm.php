@@ -37,6 +37,13 @@ date_default_timezone_set('America/New_York');
 			$txt = "Order Ends\n";
 			fwrite($myfile, $txt);
 			fclose($myfile);
+
+			//clear this users' cart
+			$sql_delete="";
+
+
+
+
 			echo "<script> alert('Success!');   window.location.href('index.php');</script>";
 
 		}
