@@ -152,7 +152,7 @@
 					</tbody>
 				</table>
 			</div>
-					<div class="category-tab shop-details-tab"><!--category-tab-->
+					<div class="category-tab shop-details-tab" style="padding-bottom:50px;"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
 								<li><a href="#description" data-toggle="tab">Description</a></li>
@@ -160,11 +160,9 @@
 								<li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
 							</ul>
 						</div>
-						<div class="tab-content">
-							<div class="tab-pane fade" id="description" >
-								<div class="col-sm-12">
-										
-									
+						<div class="tab-content"  >
+							<div class="tab-pane fade" id="description">
+								<div class="col-sm-12">									
 										<?php											
 											$restrt = mysql_query("select * from restaurant_info where Restrt_ID = ".$restrt_id) or die(mysql_error());
 											while($des = mysql_fetch_array($restrt)){
