@@ -29,6 +29,15 @@ function getBillInfo()
 		print $output;
 	}
 }
+function checkHotList()
+{
+	$bill_number = $_POST['fr_Bill_Number'];
+	$select = 'select * from credit_card_hotlist where Card_Account= "$bill_number"';
+	$sql = mysql_query($select)or die(mysql_error());
+		$row_number=0;
+	$row_number = mysql_num_rows($sql);
+	return $row_number;
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,31 +70,32 @@ function getBillInfo()
 	<script type="text/javascript">
 	function finalReview()
 	{
-					document.getElementById("fr_Ship_First_Name").value=document.getElementById("Ship_First_Name").value;
-					document.getElementById("fr_Ship_Last_Name").value=document.getElementById("Ship_Last_Name").value;
-					document.getElementById("fr_Ship_Address1").value=document.getElementById("Ship_Address1").value;
-					document.getElementById("fr_Ship_Address2").value=document.getElementById("Ship_Address2").value;
-					document.getElementById("fr_Ship_City").value=document.getElementById("Ship_City").value;
-					document.getElementById("fr_Ship_State").value=document.getElementById("Ship_State").value;
-					document.getElementById("fr_Ship_Zip").value=document.getElementById("Ship_Zip").value;
-					document.getElementById("fr_Bill_First_Name").value=document.getElementById("Bill_First_Name").value;
-					document.getElementById("fr_Bill_Last_Name").value=document.getElementById("Bill_Last_Name").value;
-					document.getElementById("fr_Bill_Address1").value=document.getElementById("Bill_Address1").value;
-					document.getElementById("fr_Bill_Address2").value=document.getElementById("Bill_Address2").value;
-					document.getElementById("fr_Bill_City").value=document.getElementById("Bill_City").value;
-					document.getElementById("fr_Bill_State").value=document.getElementById("Bill_State").value;
-					document.getElementById("fr_Bill_Zip").value=document.getElementById("Bill_Zip").value;
-					document.getElementById("fr_Bill_Type").value=document.getElementById("Bill_Type").value;
-					document.getElementById("fr_Bill_Number").value=document.getElementById("Bill_Number").value;
-					document.getElementById("fr_Bill_Holder").value=document.getElementById("Bill_Holder").value;
-					document.getElementById("fr_Bill_Expire").value=document.getElementById("Bill_Expire").value;
-				//	var hotlist = "<?php echo $_SESSION['hotlist']?>";
-				//	if(hotlist == 1){
-				//		alert("Failed!");
-				//		}else{
-		window.location.href("orderConfirm.php");
-		//}
-		// window.navigate("orderConfirm.php")
+		document.getElementById("fr_Ship_First_Name").value=document.getElementById("Ship_First_Name").value;
+		document.getElementById("fr_Ship_Last_Name").value=document.getElementById("Ship_Last_Name").value;
+		document.getElementById("fr_Ship_Address1").value=document.getElementById("Ship_Address1").value;
+		document.getElementById("fr_Ship_Address2").value=document.getElementById("Ship_Address2").value;
+		document.getElementById("fr_Ship_City").value=document.getElementById("Ship_City").value;
+		document.getElementById("fr_Ship_State").value=document.getElementById("Ship_State").value;
+		document.getElementById("fr_Ship_Zip").value=document.getElementById("Ship_Zip").value;
+		document.getElementById("fr_Bill_First_Name").value=document.getElementById("Bill_First_Name").value;
+		document.getElementById("fr_Bill_Last_Name").value=document.getElementById("Bill_Last_Name").value;
+		document.getElementById("fr_Bill_Address1").value=document.getElementById("Bill_Address1").value;
+		document.getElementById("fr_Bill_Address2").value=document.getElementById("Bill_Address2").value;
+		document.getElementById("fr_Bill_City").value=document.getElementById("Bill_City").value;
+		document.getElementById("fr_Bill_State").value=document.getElementById("Bill_State").value;
+		document.getElementById("fr_Bill_Zip").value=document.getElementById("Bill_Zip").value;
+		document.getElementById("fr_Bill_Type").value=document.getElementById("Bill_Type").value;
+		document.getElementById("fr_Bill_Number").value=document.getElementById("Bill_Number").value;
+		document.getElementById("fr_Bill_Holder").value=document.getElementById("Bill_Holder").value;
+		document.getElementById("fr_Bill_Expire").value=document.getElementById("Bill_Expire").value;
+		
+		var hotlist = "<?php echo checkHotList() ?>";
+		if(hotlist != 0){
+			alert("Failed!");
+		}else{
+			window.location.href("orderConfirm.php");
+		}
+
 	}
 	function setAddress(Adres)
 	{
@@ -351,37 +361,7 @@ function getBillInfo()
 								<p>Choose from card book:</p>
 								<?php getBillInfo() ?>
 							</div>
-							<!-- <div class="form-two">
-								<form>
-									<input type="text" placeholder="Zip / Postal Code *">
-									<select>
-										<option>-- Country --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
-									</select>
-									<select>
-										<option>-- State / Province / Region --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
-									</select>
-									<input type="password" placeholder="Confirm password">
-									<input type="text" placeholder="Phone *">
-									<input type="text" placeholder="Mobile Phone">
-									<input type="text" placeholder="Fax">
-								</form>
-							</div> -->
+						
 						</div>
 					</div>
 				</div>
@@ -405,16 +385,16 @@ function getBillInfo()
 					</thead>
 					<tbody>
 					<?php 
-							$username = $_SESSION['username'];
-							checkCart($username);
+						$username = $_SESSION['username'];
+						checkCart($username);
 					?>
 					
 					</tbody>
 				</table>
 			</div>
-			<div class="payment-options">
-				<form id="fr_Info" action="orderConfirm.php" method="POST">
-					<button id="btn_fr" class="btn btn-primary" name="btn_fr" onclick="finalReview()" >Checkout</button>
+			<div class="payment-options" style="float:right; padding-right:30px;">
+				<form id="fr_Info"  method="POST">
+					<button id="btn_fr" class="btn btn-primary" action="orderConfirm.php" name="btn_fr" onclick="finalReview()" >Checkout</button>
 					<input id="fr_Ship_First_Name" name="fr_Ship_First_Name" type="hidden">
 					<input id="fr_Ship_Last_Name" name="fr_Ship_Last_Name" type="hidden">
 					<input id="fr_Ship_Address1" name="fr_Ship_Address1" type="hidden">
@@ -433,17 +413,11 @@ function getBillInfo()
 					<input id="fr_Bill_Number" name="fr_Bill_Number" type="hidden">
 					<input id="fr_Bill_Holder" name="fr_Bill_Holder" type="hidden">
 					<input id="fr_Bill_Expire" name="fr_Bill_Expire" type="hidden">
-					<?php
-					//	$bill_number = $_GET["fr_Bill_Number"];
-					//	$select = mysql_query("select * from credit_card_hotlist where Card_Account=".$bill_number)or die(mysql_error());
-					//	if(mysql_fetch_array($select)==null){
-					//		$_SESSION['hotlist'] = 0;
-					//	}else{
-					//		$_SESSION['hotlist'] = 1;
-					//	}
-						 
-					?>
+					
+					
+					
 						<!-- <span>
+						
 							<label><input type="checkbox"> Direct Bank Transfer</label>
 						</span>
 						<span>
