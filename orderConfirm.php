@@ -3,14 +3,9 @@ include "mysql.php";
 // include "cart_add.php";
 session_start();
 
-$con = mysql_connect("localhost","root","toor");
-if (!$con)
-	{
-		die('Could not connect: ' . mysql_error());
-	}
-mysql_select_db("ruhungry", $con);
-$username=$_SESSION["username"];
-date_default_timezone_set('America/New_York');
+
+	$username=$_SESSION["username"];
+	date_default_timezone_set('America/New_York');
 
 
 		if(isset($_POST['op_Bill_Number']))
@@ -150,7 +145,32 @@ date_default_timezone_set('America/New_York');
 
     </script>
 	<header id="header">
-
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-envelope"></i> URHungry@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle">
 			<div class="container" >
 				<div class="row" >
 					<div class="col-sm-4">
@@ -172,6 +192,7 @@ date_default_timezone_set('America/New_York');
 					</div>
 				</div>
 			</div>
+		</div>
 	</header>
 
 	<section id="cart_items" style="padding-top:30px">
@@ -246,9 +267,10 @@ date_default_timezone_set('America/New_York');
 					</tbody>
 				</table>
 			</div>
-			<div class="payment-options">
+			<div class="payment-options" style="float:right; padding-right:30px;">
+				<div class="row">
 				<form id="op_Info" action="orderConfirm.php" method="POST">
-					<button id="btn_pay" name="btn_pay" onclick="pay()" >PAY</button>
+					<button id="btn_pay" class="btn btn-primary" style="width:50px;" name="btn_pay" onclick="pay()" >PAY</button>
 					<input id="op_Ship_First_Name" name="op_Ship_First_Name" type="hidden">
 					<input id="op_Ship_Last_Name" name="op_Ship_Last_Name" type="hidden">
 					<input id="op_Ship_Address1" name="op_Ship_Address1" type="hidden">
@@ -268,12 +290,31 @@ date_default_timezone_set('America/New_York');
 					<input id="op_Bill_Holder" name="op_Bill_Holder" type="hidden">
 					<input id="op_Bill_Expire" name="op_Bill_Expire" type="hidden">
 				</form>
-					<button id="btn_back" name="btn_back" onclick="history.go(-1);" >Back</button>
+					<button id="btn_back" class="btn btn-primary" style="width:50px;" name="btn_back" onclick="history.go(-1);" >Back</button>
+			</div>
 			</div>
 		</div>
 		</div>
 	</section> <!--/#cart_items-->
-
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10">
+						<div class="companyinfo">
+							<h2><span>RUH</span>ungry</h2>
+							<p>CS6548 E-Commerce</p>
+						</div>
+					</div>					
+					<div class="col-sm-2">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!--/Footer-->
 
     <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -282,4 +323,3 @@ date_default_timezone_set('America/New_York');
     <script src="js/main.js"></script>
 </body>
 </html>
-<?php mysql_close($con) ?>
