@@ -3,16 +3,11 @@ include "mysql.php";
 include "cart_add.php";
 session_start();
 
-$con = mysql_connect("localhost","root","toor");
-if (!$con)
-	{
-		die('Could not connect: ' . mysql_error());
-	}
-mysql_select_db("ruhungry", $con);
+
 $tempname=$_SESSION["username"];
 function getAddressInfo()
 {	
-$tempname=$_SESSION["username"];
+	$tempname=$_SESSION["username"];
 	$sql_select = "SELECT * FROM shipping_address WHERE Username = '$tempname'";
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result))
@@ -24,8 +19,8 @@ $tempname=$_SESSION["username"];
 }
 function getBillInfo()
 {
-$tempname=$_SESSION["username"];
-	$sql_select = "SELECT * FROM credit_card_hotlist WHERE Username = '$tempname'";
+	$tempname=$_SESSION["username"];
+	$sql_select = "SELECT * FROM credit_card_info WHERE Username = '$tempname'";
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result))
 	{
@@ -84,7 +79,12 @@ $tempname=$_SESSION["username"];
 					document.getElementById("fr_Bill_Number").value=document.getElementById("Bill_Number").value;
 					document.getElementById("fr_Bill_Holder").value=document.getElementById("Bill_Holder").value;
 					document.getElementById("fr_Bill_Expire").value=document.getElementById("Bill_Expire").value;
+				//	var hotlist = "<?php echo $_SESSION['hotlist']?>";
+				//	if(hotlist == 1){
+				//		alert("Failed!");
+				//		}else{
 		window.location.href("orderConfirm.php");
+		//}
 		// window.navigate("orderConfirm.php")
 	}
 	function setAddress(Adres)
@@ -193,7 +193,32 @@ $tempname=$_SESSION["username"];
     // }
     </script>
 	<header id="header">
-
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-envelope"></i> URHungry@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle">
 			<div class="container" >
 				<div class="row" >
 					<div class="col-sm-4">
@@ -215,6 +240,7 @@ $tempname=$_SESSION["username"];
 					</div>
 				</div>
 			</div>
+		</div>
 	</header>
 
 	<section id="cart_items" style="padding-top:30px">
@@ -264,9 +290,9 @@ $tempname=$_SESSION["username"];
 								<input id="Ship_State" name="Ship_State" type="text" placeholder="State" value="<?php echo $_POST['Ship_State'] ?>">
 								<input id="Ship_Zip" name="Ship_Zip" type="text" placeholder="Zip" value="<?php echo $_POST['Ship_Zip'] ?>">
 								<!-- <input id="Ship_Submit" name="Ship_Submit" type="text" placeholder=""style="display:none;"> -->
-								<button id="btn_Ship_Submit" name="btn_Ship_Submit" type="button" onclick="saveAddress()" >Save to Address Book</button>
-						    	<button id="btn_Ship_Reset" type="button" onclick="reset()" value="Reset">Reset</button>
-						    	<button id="btn_copyTo" type="button" onclick="copyTo()" value="copyTo">Copy to billing address</button>
+								<button id="btn_Ship_Submit" name="btn_Ship_Submit" type="button" class="btn btn-primary" onclick="saveAddress()" >Save to Address Book</button>
+						    	<button id="btn_Ship_Reset" type="button" onclick="reset()" class="btn btn-primary" value="Reset">Reset</button>
+						    	<button id="btn_copyTo" type="button" onclick="copyTo()" class="btn btn-primary" value="copyTo">Copy to billing address</button>
 						    	<p><?php
 						    	if(isset($_POST['Ship_Last_Name']))
 								{
@@ -308,12 +334,12 @@ $tempname=$_SESSION["username"];
 									<input id="Bill_Expire" name="Bill_Expire" type="text" placeholder="Expire Date" value="<?php echo $_POST['Bill_Expire'] ?>">
 									<!-- <input id="Bill_Type" name="Bill_Type" type="text" placeholder="Card Type"> -->
 									
-									<button id="btn_Bill_Submit" type="button" onclick="saveCard()" name="btn_Bill_Submit" value="saveCard">Save to Card Book</button>
-						    		<button id="btn_Bill_Reset" type="button" onclick="reset()" value="Reset">Reset</button>
+									<button id="btn_Bill_Submit" type="button"  class="btn btn-primary" onclick="saveCard()" name="btn_Bill_Submit" value="saveCard">Save to Card Book</button>
+						    		<button id="btn_Bill_Reset" type="button"  class="btn btn-primary" onclick="reset()" value="Reset">Reset</button>
 						    		<p><?php
 						    		if(isset($_POST['Bill_Number']))
 									{
-										$sql="INSERT INTO credit_card_hotlist (Card_Account,Card_Type,Card_Holder,Card_Expire,Bill_Address, Username)
+										$sql="INSERT INTO credit_card_info (Card_Account,Card_Type,Card_Holder,Card_Expire,Bill_Address, Username)
 									VALUES
 									('$_POST[Bill_Number]','$_POST[Bill_Type]','$_POST[Bill_Holder]','$_POST[Bill_Expire]','$_POST[Bill_First_Name]| |$_POST[Bill_Last_Name]| |$_POST[Bill_Address1]| |$_POST[Bill_Address2]| |$_POST[Bill_City]| |$_POST[Bill_State]| |$_POST[Bill_Zip]','$tempname')";
 										if (!mysql_query($sql,$con))
@@ -373,6 +399,7 @@ $tempname=$_SESSION["username"];
 							<td class="price">Price</td>
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
+							<td class=""></td>
 							<td></td>
 						</tr>
 					</thead>
@@ -381,111 +408,13 @@ $tempname=$_SESSION["username"];
 							$username = $_SESSION['username'];
 							checkCart($username);
 					?>
-						<!-- <tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/two.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/three.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="4">&nbsp;</td>
-							<td colspan="2">
-								<table class="table table-condensed total-result">
-									<tr>
-										<td>Cart Sub Total</td>
-										<td>$59</td>
-									</tr>
-									<tr>
-										<td>Exo Tax</td>
-										<td>$2</td>
-									</tr>
-									<tr class="shipping-cost">
-										<td>Shipping Cost</td>
-										<td>Free</td>
-									</tr>
-									<tr>
-										<td>Total</td>
-										<td><span>$61</span></td>
-									</tr>
-								</table>
-							</td>
-						</tr> -->
+					
 					</tbody>
 				</table>
 			</div>
 			<div class="payment-options">
 				<form id="fr_Info" action="orderConfirm.php" method="POST">
-					<button id="btn_fr" name="btn_fr" onclick="finalReview()" >Final Review</button>
+					<button id="btn_fr" class="btn btn-primary" name="btn_fr" onclick="finalReview()" >Checkout</button>
 					<input id="fr_Ship_First_Name" name="fr_Ship_First_Name" type="hidden">
 					<input id="fr_Ship_Last_Name" name="fr_Ship_Last_Name" type="hidden">
 					<input id="fr_Ship_Address1" name="fr_Ship_Address1" type="hidden">
@@ -504,6 +433,16 @@ $tempname=$_SESSION["username"];
 					<input id="fr_Bill_Number" name="fr_Bill_Number" type="hidden">
 					<input id="fr_Bill_Holder" name="fr_Bill_Holder" type="hidden">
 					<input id="fr_Bill_Expire" name="fr_Bill_Expire" type="hidden">
+					<?php
+					//	$bill_number = $_GET["fr_Bill_Number"];
+					//	$select = mysql_query("select * from credit_card_hotlist where Card_Account=".$bill_number)or die(mysql_error());
+					//	if(mysql_fetch_array($select)==null){
+					//		$_SESSION['hotlist'] = 0;
+					//	}else{
+					//		$_SESSION['hotlist'] = 1;
+					//	}
+						 
+					?>
 						<!-- <span>
 							<label><input type="checkbox"> Direct Bank Transfer</label>
 						</span>
@@ -518,7 +457,25 @@ $tempname=$_SESSION["username"];
 		</div>
 		</div>
 	</section> <!--/#cart_items-->
-
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10">
+						<div class="companyinfo">
+							<h2><span>RUH</span>ungry</h2>
+							<p>CS6548 E-Commerce</p>
+						</div>
+					</div>					
+					<div class="col-sm-2">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!--/Footer-->
 
     <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -527,4 +484,3 @@ $tempname=$_SESSION["username"];
     <script src="js/main.js"></script>
 </body>
 </html>
-<?php mysql_close($con) ?>
