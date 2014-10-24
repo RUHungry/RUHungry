@@ -37,13 +37,6 @@ date_default_timezone_set('America/New_York');
 			$txt = "Order Ends\n";
 			fwrite($myfile, $txt);
 			fclose($myfile);
-
-			//clear this users' cart
-			$sql_delete="";
-
-
-
-
 			echo "<script> alert('Success!');   window.location.href('index.php');</script>";
 
 		}
@@ -61,7 +54,7 @@ date_default_timezone_set('America/New_York');
 		}
 		else{ echo "No user!";}
 		$result = mysql_query($sql_select) or die("sql error!");
-		$TT=0;
+
 		while($row = mysql_fetch_array($result)){
 			//print html form of the shopping cart
 			$outputlist = "";
@@ -87,10 +80,9 @@ date_default_timezone_set('America/New_York');
 			$outputlist.= '</form>';
 			$outputlist.= '</td>';
 			$outputlist.= '</tr>';
-			$TT+=$row["Price"]*$row["Quantity"];
+
 			print $outputlist;
 		}
-		echo '<p class="cart_total_price">Total Price:  '.$TT.'</p>';
 	}
 
 
