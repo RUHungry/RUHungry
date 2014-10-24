@@ -85,7 +85,7 @@
 		</div>
 	</header>
 
-	<section id="cart_items" style="padding-top:30px; padding-bottom:100px;">
+	<section id="cart_items" style="padding-top:30px; padding-bottom:150px;">
 		<div class="container">
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
