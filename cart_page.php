@@ -35,7 +35,32 @@
 
 <body>
 	<header id="header">
-
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-envelope"></i> URHungry@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle">
 			<div class="container" >
 				<div class="row" >
 					<div class="col-sm-4">
@@ -57,9 +82,10 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</header>
 
-	<section id="cart_items" style="padding-top:30px">
+	<section id="cart_items" style="padding-top:30px; padding-bottom:150px;">
 		<div class="container">
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
@@ -91,9 +117,33 @@
 
 				</table>
 			</div>
+			<div 
+			<div style="float:right; padding-right:30px;">
+				<button id="btn_go_check" class="btn btn-primary"  name="btn_go_check" href="checkout.php">Go to Checkout</button>
+			</div>
+			</div>
 		</div>
+		
 	</section> <!--/#cart_items-->
-
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10">
+						<div class="companyinfo">
+							<h2><span>RUH</span>ungry</h2>
+							<p>CS6548 E-Commerce</p>
+						</div>
+					</div>					
+					<div class="col-sm-2">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!--/Footer-->
 	
 
 

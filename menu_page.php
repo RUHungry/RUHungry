@@ -3,6 +3,7 @@
 <?php	
 	include "mysql.php";
 	include "cart_add.php";
+	include "menu_get.php";
 	session_start();
 	
 ?>
@@ -104,7 +105,7 @@
 						<?php
 							//$username ="chenlongjiu";
 							//echo "hello";
-							include "menu_get.php";
+							
 							$_SERVER["QUERY_STRING"];
 							$restrt_id = $_GET["Restrt_Type"];
 							

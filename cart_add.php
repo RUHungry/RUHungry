@@ -14,8 +14,12 @@
 			$_SESSION[""] = "";
 		}
 		$result = mysql_query($sql_select) or die("sql error!");
-		
-
+		$row_number = mysql_num_rows($result);
+		if($row_number==0)
+		{
+			echo '<tr><td>Your cart is empty.</td><tr>';
+		}else
+		{
 		while($row = mysql_fetch_array($result)){
 			//print html form of the shopping cart
 			$outputlist = "";
@@ -24,10 +28,10 @@
 			$outputlist.= '<h4><a href="menu_page.php?Restrt_Type='.$row["Restrt_ID"].'">'.$row["Restrt_Name"].'</a></h4>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td>';
-			$outputlist.= '<p>'.$row["Item_Name"].'</p>';
+			$outputlist.= $row["Item_Name"];
 			$outputlist.= '</td>';
 			$outputlist.= '<td class="cart_price">';
-			$outputlist.= '<p>'.$row["Price"].'</p>';
+			$outputlist.= $row["Price"];
 			$outputlist.= '</td>';
 			$outputlist.= '<form action="cart_update.php" method="post"> ';
 			$outputlist.= '<input name="Cart_ID" value="'.$row["Cart_ID"].'" style="display:none;">';
@@ -37,21 +41,22 @@
 			$outputlist.= '<input class="cart_quantity_input" type="text" name="Quantity" value="'.$row["Quantity"].'" autocomplete="off" size="2" kl_vkbd_parsed="true">';
 			$outputlist.= '</div>';
 			$outputlist.= '</td>';
-			$outputlist.= '<td class="cart_total">';
-			$outputlist.= '<p class="cart_total_price">'.($row["Price"]*$row["Quantity"]).'</p>';
+			$outputlist.= '<td class="cart_total_price">';
+			$outputlist.= ($row["Price"]*$row["Quantity"]);
 			$outputlist.= '</td>';
 			$outputlist.= '<td>';
-			$outputlist.= '<button class="submit btn btn-default" style="background-color:#00CCFF;">update</button> </form>';
+			$outputlist.= '<button class="btn btn-primary" style="margin-top:0px">update</button> </form>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td>';
 			$outputlist.= '<form action="cart_delete.php" method="post">  <input name="Item_Name" value="'.$row["Item_ID"].'" style="display:none;">';
 			$outputlist.= '<input name="Username" value="'.$username.'" style="display:none;">';
 			$outputlist.= '<input name="Method" value="delete" style="display:none;">';
-			$outputlist.= '<button class="submit btn btn-success">delete</button> </form>';
+			$outputlist.= '<button class="btn btn-primary" style="margin-top:0px">delete</button> </form>';
 			$outputlist.= '</td>';
 			$outputlist.= '</tr>';
 			
 			print $outputlist;
+		}
 		}
 	}
 
