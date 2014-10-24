@@ -117,7 +117,13 @@
 
 				</table>
 			</div>
+			<div 
+			<div style="float:right; padding-right:30px;">
+				<button id="btn_go_check" class="btn btn-primary"  name="btn_go_check" href="checkout.php">Go to Checkout</button>
+			</div>
+			</div>
 		</div>
+		
 	</section> <!--/#cart_items-->
 	<footer id="footer"><!--Footer-->
 		<div class="footer-top">

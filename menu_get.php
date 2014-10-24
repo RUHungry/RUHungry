@@ -31,7 +31,7 @@ function checkMenu($restrt_id){
 			$outputlist.= '<input name="Item_ID" value="'.$row["Item_ID"].'" style="display:none;">';
 			$outputlist.= '<input name="Username" value="'.$_SESSION["username"].'" style="display:none;">';
 			$outputlist.= '<input name="Restrt_ID" value="'.$restrt_id.'" style="display:none;">';			
-			$outputlist.= '<button class="submit btn btn-default">Add</button> </form>';
+			$outputlist.= '<button class="btn btn-primary" style="margin-top:0px">Add</button> </form>';
 			$outputlist.= '</td>';
 			$outputlist.= '</tr>';
 			
