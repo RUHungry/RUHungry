@@ -14,8 +14,12 @@
 			$_SESSION[""] = "";
 		}
 		$result = mysql_query($sql_select) or die("sql error!");
-		
-
+		$row_number = mysql_num_rows($result);
+		if($row_number==0)
+		{
+			echo '<tr><td>Your cart is empty.</td><tr>';
+		}else
+		{
 		while($row = mysql_fetch_array($result)){
 			//print html form of the shopping cart
 			$outputlist = "";
@@ -41,17 +45,18 @@
 			$outputlist.= '<p class="cart_total_price">'.($row["Price"]*$row["Quantity"]).'</p>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td>';
-			$outputlist.= '<button class="submit btn btn-default" style="background-color:#00CCFF;">update</button> </form>';
+			$outputlist.= '<button class="btn btn-primary" >update</button> </form>';
 			$outputlist.= '</td>';
 			$outputlist.= '<td>';
 			$outputlist.= '<form action="cart_delete.php" method="post">  <input name="Item_Name" value="'.$row["Item_ID"].'" style="display:none;">';
 			$outputlist.= '<input name="Username" value="'.$username.'" style="display:none;">';
 			$outputlist.= '<input name="Method" value="delete" style="display:none;">';
-			$outputlist.= '<button class="submit btn btn-success">delete</button> </form>';
+			$outputlist.= '<button class="btn btn-primary">delete</button> </form>';
 			$outputlist.= '</td>';
 			$outputlist.= '</tr>';
 			
 			print $outputlist;
+		}
 		}
 	}
 
