@@ -12,8 +12,8 @@ function getAddressInfo()
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result))
 	{
-
-		$output = '<button id="'.$row['shipping_ID'].'"style="display:block;" value="'.$row['shipping_ID'].' type="button" onclick="setAddress(\''.$row['shipping_address'].'\')">'.$row['shipping_address'].'</button>';
+                                            
+		$output = '<button id="'.$row['shipping_ID'].' class="btn btn-primary"  "style="display:block;" type="button" onclick="setAddress(\''.$row['First_Name'].'\',\''.$row['Last_Name'].'\',\''.$row['Address1'].'\',\''.$row['Address2'].'\',\''.$row['City'].'\',\''.$row['State_USA'].'\',\''.$row['Zip'].'\')">'.$row['First_Name'].' '.$row['Last_Name'].'</button>';
 		print $output;
 	}
 }
@@ -23,20 +23,28 @@ function getBillInfo()
 	$sql_select = "SELECT * FROM credit_card_info WHERE Username = '$tempname'";
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result))
-	{
-
-		$output = '<button id="'.$row['Card_ID'].'"style="display:block;" value="'.$row['Card_ID'].' type="button" onclick="setBill(\''.$row['Card_Account'].'| |'.$row['Card_Type'].'| |'.$row['Card_Holder'].'| |'.$row['Card_Expire'].'| |'.$row['Bill_Address'].'| |'.'\')">'.$row['Card_Account'].'</button>';
+	{                                                                                                                                                                 
+		$output = '<button id="'.$row['Card_ID'].'"style="display:block;" type="button" onclick="setBill(\''.$row['Card_Account'].'\',\''.$row['Card_Holder'].'\', \''.$row['Card_Expire'].'\', \''.$row['Card_Type'].'\', \''.$row['First_Name'].'\', \''.$row['Last_Name'].'\',\''.$row['Address1'].'\',\''.$row['Address2'].'\',\''.$row['City'].'\',\''.$row['State_USA'].'\',\''.$row['Zip'].'\')">'.$row['Card_Account'].'</button>';
 		print $output;
 	}
 }
-function checkHotList()
-{
+
+if(isset($_POST['fr_Info'])){
 	$bill_number = $_POST['fr_Bill_Number'];
-	$select = 'select * from credit_card_hotlist where Card_Account= "$bill_number"';
+	$select = "select * from credit_card_hotlist where Card_Account= '$bill_number'";
 	$sql = mysql_query($select)or die(mysql_error());
-		$row_number=0;
-	$row_number = mysql_num_rows($sql);
-	return $row_number;
+	//$_SESSION['row_number'] = 
+	echo"<script language=\"javascript\">";
+        echo"alert(\"mysql_num_rows($sql)\");";
+        
+        echo"</script>"; 
+	if(mysql_num_rows($sql)==0)
+	{
+		echo"<script language=\"javascript\">";
+        echo"alert(\"Failed\");";
+        
+        echo"</script>"; 
+	}
 }
 ?>
 
@@ -89,39 +97,38 @@ function checkHotList()
 		document.getElementById("fr_Bill_Holder").value=document.getElementById("Bill_Holder").value;
 		document.getElementById("fr_Bill_Expire").value=document.getElementById("Bill_Expire").value;
 		
-		var hotlist = "<?php echo checkHotList() ?>";
-		if(hotlist != 0){
-			alert("Failed!");
-		}else{
-			window.location.href("orderConfirm.php");
-		}
+		//var hotlist = 1;
+		//"<?php echo $_SESSION['row_number'] ?>";
+		///if(hotlist != 0){
+		////	alert("Failed!");
+		//}else{
+	//		document.getElementById("fr_Info").submit();
+	//	}
 
 	}
-	function setAddress(Adres)
+	function setAddress(first_Name, last_Name, address1, address2, city, state, zip)
 	{
-		var Address=Adres.split('| |',7);
-		document.getElementById("Ship_First_Name").value=Address[0];
-		document.getElementById("Ship_Last_Name").value=Address[1];
-		document.getElementById("Ship_Address1").value=Address[2];
-		document.getElementById("Ship_Address2").value=Address[3];
-		document.getElementById("Ship_City").value=Address[4];
-		document.getElementById("Ship_State").value=Address[5];
-		document.getElementById("Ship_Zip").value=Address[6];
+		document.getElementById("Ship_First_Name").value=first_Name;
+		document.getElementById("Ship_Last_Name").value=last_Name;
+		document.getElementById("Ship_Address1").value=address1;
+		document.getElementById("Ship_Address2").value=address2;
+		document.getElementById("Ship_City").value=city;
+		document.getElementById("Ship_State").value=state;
+		document.getElementById("Ship_Zip").value=zip;
 	}
-	function setBill(Card)
+	function setBill(account, holder, expire, type, first_Name, last_Name, address1, address2, city, state, zip)
 	{
-		var Bill=Card.split('| |',11);
-		document.getElementById("Bill_Number").value=Bill[0];
-		document.getElementById("Bill_Holder").value=Bill[2];
-		document.getElementById("Bill_Expire").value=Bill[3];
-		document.getElementById("Bill_Type").value=Bill[1];
-		document.getElementById("Bill_First_Name").value=Bill[4];
-		document.getElementById("Bill_Last_Name").value=Bill[5];
-		document.getElementById("Bill_Address1").value=Bill[6];
-		document.getElementById("Bill_Address2").value=Bill[7];
-		document.getElementById("Bill_City").value=Bill[8];
-		document.getElementById("Bill_State").value=Bill[9];
-		document.getElementById("Bill_Zip").value=Bill[10];
+		document.getElementById("Bill_Number").value=account;
+		document.getElementById("Bill_Holder").value=holder;
+		document.getElementById("Bill_Expire").value=expire;
+		document.getElementById("Bill_Type").value=type;
+		document.getElementById("Bill_First_Name").value=first_Name;
+		document.getElementById("Bill_Last_Name").value=last_Name;
+		document.getElementById("Bill_Address1").value=address1;
+		document.getElementById("Bill_Address2").value=address2;
+		document.getElementById("Bill_City").value=city;
+		document.getElementById("Bill_State").value=state;
+		document.getElementById("Bill_Zip").value=zip;
 
 
 	}
@@ -181,6 +188,30 @@ function checkHotList()
     	{
 			document.getElementById("Bill_Info").submit();
 		}
+	}
+	function resetShippingInfo()
+	{
+		document.getElementById("Ship_First_Name").value="";
+		document.getElementById("Ship_Last_Name").value="";
+		document.getElementById("Ship_Address1").value="";
+		document.getElementById("Ship_Address2").value="";
+		document.getElementById("Ship_City").value="";
+		document.getElementById("Ship_State").value="";
+		document.getElementById("Ship_Zip").value="";
+	}
+	function resetBillingInfo()
+	{
+		document.getElementById("Bill_Number").value="";
+		document.getElementById("Bill_Holder").value="";
+		document.getElementById("Bill_Expire").value="";
+		document.getElementById("Bill_Type").value="";
+		document.getElementById("Bill_First_Name").value="";
+		document.getElementById("Bill_Last_Name").value="";
+		document.getElementById("Bill_Address1").value="";
+		document.getElementById("Bill_Address2").value="";
+		document.getElementById("Bill_City").value="";
+		document.getElementById("Bill_State").value="";
+		document.getElementById("Bill_Zip").value="";
 	}
     // function checkLogin()
     // {
@@ -301,15 +332,16 @@ function checkHotList()
 								<input id="Ship_Zip" name="Ship_Zip" type="text" placeholder="Zip" value="<?php echo $_POST['Ship_Zip'] ?>">
 								<!-- <input id="Ship_Submit" name="Ship_Submit" type="text" placeholder=""style="display:none;"> -->
 								<button id="btn_Ship_Submit" name="btn_Ship_Submit" type="button" class="btn btn-primary" onclick="saveAddress()" >Save to Address Book</button>
-						    	<button id="btn_Ship_Reset" type="button" onclick="reset()" class="btn btn-primary" value="Reset">Reset</button>
+						    	<button id="btn_Ship_Reset" type="button" onclick="resetShippingInfo()" class="btn btn-primary" value="Reset">Reset</button>
 						    	<button id="btn_copyTo" type="button" onclick="copyTo()" class="btn btn-primary" value="copyTo">Copy to billing address</button>
-						    	<p><?php
+						    	<p>
+								<?php
 						    	if(isset($_POST['Ship_Last_Name']))
 								{
-									$sql="INSERT INTO shipping_address (Shipping_Address, Username)
+									$sql="INSERT INTO shipping_address (First_Name, Last_Name, Address1, Address2, City, State_USA, Zip, Username)
 								VALUES
-								('$_POST[Ship_First_Name]| |$_POST[Ship_Last_Name]| |$_POST[Ship_Address1]| |$_POST[Ship_Address2]| |$_POST[Ship_City]| |$_POST[Ship_State]| |$_POST[Ship_Zip]','$tempname')";
-									if (!mysql_query($sql,$con))
+								('$_POST[Ship_First_Name]', '$_POST[Ship_Last_Name]', '$_POST[Ship_Address1]', '$_POST[Ship_Address2]', '$_POST[Ship_City]', '$_POST[Ship_State]', '$_POST[Ship_Zip]','$tempname')";
+									if (!mysql_query($sql))
 											die('Error: ' . mysql_error());
 									else echo "<script>alert('Success!')</script>";
 								}
@@ -345,14 +377,14 @@ function checkHotList()
 									<!-- <input id="Bill_Type" name="Bill_Type" type="text" placeholder="Card Type"> -->
 									
 									<button id="btn_Bill_Submit" type="button"  class="btn btn-primary" onclick="saveCard()" name="btn_Bill_Submit" value="saveCard">Save to Card Book</button>
-						    		<button id="btn_Bill_Reset" type="button"  class="btn btn-primary" onclick="reset()" value="Reset">Reset</button>
+						    		<button id="btn_Bill_Reset" type="button"  class="btn btn-primary" onclick="resetBillingInfo()" value="Reset">Reset</button>
 						    		<p><?php
 						    		if(isset($_POST['Bill_Number']))
 									{
-										$sql="INSERT INTO credit_card_info (Card_Account,Card_Type,Card_Holder,Card_Expire,Bill_Address, Username)
-									VALUES
-									('$_POST[Bill_Number]','$_POST[Bill_Type]','$_POST[Bill_Holder]','$_POST[Bill_Expire]','$_POST[Bill_First_Name]| |$_POST[Bill_Last_Name]| |$_POST[Bill_Address1]| |$_POST[Bill_Address2]| |$_POST[Bill_City]| |$_POST[Bill_State]| |$_POST[Bill_Zip]','$tempname')";
-										if (!mysql_query($sql,$con))
+										$sql="INSERT INTO credit_card_info (Card_Account,Card_Type,Card_Holder,Card_Expire, First_Name, Last_Name, Address1, Address2, City, State_USA, Zip, Username)
+									          VALUES
+									         ('$_POST[Bill_Number]','$_POST[Bill_Type]','$_POST[Bill_Holder]','$_POST[Bill_Expire]','$_POST[Bill_First_Name]', '$_POST[Bill_Last_Name]', '$_POST[Bill_Address1]', '$_POST[Bill_Address2]', '$_POST[Bill_City]', '$_POST[Bill_State]', '$_POST[Bill_Zip]','$tempname')";
+										if (!mysql_query($sql))
 												die('Error: ' . mysql_error());
 										else echo "<script>alert('Success!')</script>";
 									}
@@ -360,8 +392,7 @@ function checkHotList()
 								</form>
 								<p>Choose from card book:</p>
 								<?php getBillInfo() ?>
-							</div>
-						
+							</div>						
 						</div>
 					</div>
 				</div>
@@ -393,8 +424,8 @@ function checkHotList()
 				</table>
 			</div>
 			<div class="payment-options" style="float:right; padding-right:30px;">
-				<form id="fr_Info"  method="POST">
-					<button id="btn_fr" class="btn btn-primary" action="orderConfirm.php" name="btn_fr" onclick="finalReview()" >Checkout</button>
+				<form id="fr_Info"  name="fr_Info" action="orderConfirm.php" method="POST">
+					<button id="btn_fr" class="btn btn-primary"  name="btn_fr" onclick="finalReview()" >Checkout</button>
 					<input id="fr_Ship_First_Name" name="fr_Ship_First_Name" type="hidden">
 					<input id="fr_Ship_Last_Name" name="fr_Ship_Last_Name" type="hidden">
 					<input id="fr_Ship_Address1" name="fr_Ship_Address1" type="hidden">
@@ -412,10 +443,7 @@ function checkHotList()
 					<input id="fr_Bill_Type" name="fr_Bill_Type" type="hidden">
 					<input id="fr_Bill_Number" name="fr_Bill_Number" type="hidden">
 					<input id="fr_Bill_Holder" name="fr_Bill_Holder" type="hidden">
-					<input id="fr_Bill_Expire" name="fr_Bill_Expire" type="hidden">
-					
-					
-					
+					<input id="fr_Bill_Expire" name="fr_Bill_Expire" type="hidden">					
 						<!-- <span>
 						
 							<label><input type="checkbox"> Direct Bank Transfer</label>
