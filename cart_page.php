@@ -119,7 +119,7 @@
 			</div>
 			<div 
 			<div style="float:right; padding-right:30px;">
-				<button id="btn_go_check" class="btn btn-primary"  name="btn_go_check" href="checkout.php">Go to Checkout</button>
+				<button id="btn_go_check" class="btn btn-primary"  name="btn_go_check" onclick="window.location.href='checkout.php'">Go to Checkout</button>
 			</div>
 			</div>
 		</div>
