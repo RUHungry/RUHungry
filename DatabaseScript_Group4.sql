@@ -92,7 +92,13 @@ CREATE TABLE credit_card_info (
   Card_Type VARCHAR(15) NULL,
   Card_Holder VARCHAR(50) NULL,
   Card_Expire VARCHAR(50) NULL,
-  Bill_Address VARCHAR(150) NULL,
+  First_Name VARCHAR(50) NOT NULL,
+  Last_Name VARCHAR(50) NOT NULL,
+  Address1 VARCHAR(100) NOT NULL,
+  Address2 VARCHAR(100) NULL,
+  City VARCHAR(50) NOT NULL,
+  State_USA VARCHAR(50) NOT NULL,
+  Zip VARCHAR(50) NOT NULL,
   PRIMARY KEY (Card_ID),
   FOREIGN key (Username) references customer_info (Username));
 
@@ -148,7 +154,13 @@ CREATE TABLE purchase_alerts (
 DROP TABLE IF EXISTS shipping_address;
 CREATE TABLE shipping_address (
   shipping_ID INT NOT NULL AUTO_INCREMENT,
-  shipping_address VARCHAR(200) NOT NULL,
+  First_Name VARCHAR(50) NOT NULL,
+  Last_Name VARCHAR(50) NOT NULL,
+  Address1 VARCHAR(100) NOT NULL,
+  Address2 VARCHAR(100) NULL,
+  City VARCHAR(50) NOT NULL,
+  State_USA VARCHAR(50) NOT NULL,
+  Zip VARCHAR(50) NOT NULL,
   Username VARCHAR(50) NOT NULL,
   PRIMARY KEY (shipping_ID),
   FOREIGN KEY (Username) references customer_info (Username));

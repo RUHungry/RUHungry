@@ -211,8 +211,8 @@ session_start();
 						<div class="shopper-info">
 							<p>Shipping Information</p>
 							<form id="Ship_Info">
-								<input  readonly＝"readonly" id="Ship_First_Name" name="Ship_First_Name" type="text" placehold="First Name" value="<?php echo $_POST['fr_Ship_First_Name'] ?>">
-								<input  readonly＝"readonly" id="Ship_Last_Name" name="Ship_Last_Name" type="text" placehold="Last Name" value="<?php echo $_POST['fr_Ship_Last_Name'] ?>">
+								<input  readonly＝"readonly" id="Ship_First_Name" name="Ship_First_Name" type="text" placehold="First Name" value="<?php echo $_POST['fr_Ship_First_Name'] ?>" />
+								<input  readonly＝"readonly" id="Ship_Last_Name" name="Ship_Last_Name" type="text" placehold="Last Name" value="<?php echo $_POST['fr_Ship_Last_Name'] ?>" />
 								<input  readonly＝"readonly" id="Ship_Address1" name="Ship_Address1" type="text" placehold="Address1" value="<?php echo $_POST['fr_Ship_Address1'] ?>">
 								<input  readonly＝"readonly" id="Ship_Address2" name="Ship_Address2" type="text" placehold="Address2" value="<?php echo $_POST['fr_Ship_Address2'] ?>">
 								<input  readonly＝"readonly" id="Ship_City" name="Ship_City" type="text" placehold="City" value="<?php echo $_POST['fr_Ship_City'] ?>">
@@ -270,7 +270,7 @@ session_start();
 			<div class="payment-options" style="float:right; padding-right:30px;">
 				<div class="row">
 				<form id="op_Info" action="orderConfirm.php" method="POST">
-					<button id="btn_pay" class="btn btn-primary" style="width:50px;" name="btn_pay" onclick="pay()" >PAY</button>
+					<button id="btn_pay" class="btn btn-primary" style="width:100px;" name="btn_pay" onclick="pay()" >Place Order</button>
 					<input id="op_Ship_First_Name" name="op_Ship_First_Name" type="hidden">
 					<input id="op_Ship_Last_Name" name="op_Ship_Last_Name" type="hidden">
 					<input id="op_Ship_Address1" name="op_Ship_Address1" type="hidden">
@@ -290,7 +290,7 @@ session_start();
 					<input id="op_Bill_Holder" name="op_Bill_Holder" type="hidden">
 					<input id="op_Bill_Expire" name="op_Bill_Expire" type="hidden">
 				</form>
-					<button id="btn_back" class="btn btn-primary" style="width:50px;" name="btn_back" onclick="history.go(-1);" >Back</button>
+				<!--<button id="btn_back" class="btn btn-primary" style="width:50px;" name="btn_back" onclick="history.go(-1);" >Back</button>-->
 			</div>
 			</div>
 		</div>
