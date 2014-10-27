@@ -211,7 +211,7 @@ if (!empty($tab))
 	<br>
 	<br>
 	<br>
-	<footer id="footer"><!--Footer-->
+	<!--<footer id="footer">
 		<div class="footer-top">
 			<div class="container">
 				<div class="row">
@@ -229,7 +229,7 @@ if (!empty($tab))
 				</div>
 			</div>
 		</div>
-	</footer><!--/Footer-->
+	</footer>/Footer-->
 </body>
 
 </html>
