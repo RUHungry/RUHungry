@@ -12,7 +12,11 @@
 		else{ 
 			$_SESSION["Username"] = "guest";
 			$_SESSION[""] = "";
+			$sql_select = 'select shopping_cart_info.Cart_ID,shopping_cart_info.Restrt_ID,inventory_info.Item_Name, inventory_info.Item_ID, restaurant_info.Restrt_Name, shopping_cart_info.Quantity, inventory_info.Price from shopping_cart_info 
+			left join inventory_info on shopping_cart_info.Item_ID = inventory_info.Item_ID left join restaurant_info on shopping_cart_info.Restrt_ID = restaurant_info.Restrt_ID where Username ="'.$username.'"';
+		
 		}
+
 		$result = mysql_query($sql_select) or die("sql error!");
 		$row_number = mysql_num_rows($result);
 		if($row_number==0)
