@@ -53,11 +53,8 @@ session_start();
 			//clear this users' cart
 			$sql_delete="delete from shopping_cart_info where Username='$username'";
 			mysql_query($sql_delete);
-
-
-
-			echo "<script> alert('Success!');</script>";
-			echo "<script> window.location.href('index.php');</script>";
+			die("Thank you for your purchase! <a href=index.php>Go Home</a>");
+			//header("Location: index.php");
 
 		}
 
