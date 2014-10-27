@@ -22,12 +22,12 @@ session_start();
 		echo"<script language=\"javascript\">";
         echo"alert(\"Sorry！Your payment is rejected!\");";
         echo"history.go(-1);";
-        echo"</script>";
+        echo"</script>"; 
 		}
 	}
 		if(isset($_POST['op_Bill_Number']))
 		{
-			$sql_select = 'select inventory_info.Item_Name, inventory_info.Item_ID, restaurant_info.Restrt_Name, shopping_cart_info.Quantity, inventory_info.Price from shopping_cart_info
+			$sql_select = 'select inventory_info.Item_Name, inventory_info.Item_ID, restaurant_info.Restrt_Name, shopping_cart_info.Quantity, inventory_info.Price from shopping_cart_info 
 			left join inventory_info on shopping_cart_info.Item_ID = inventory_info.Item_ID left join restaurant_info on shopping_cart_info.Restrt_ID = restaurant_info.Restrt_ID where Username ="'.$username.'"';
 			$result = mysql_query($sql_select) or die("sql error!");
 			$time = date('ymdhis',time());
@@ -52,7 +52,7 @@ session_start();
 
 			//clear this users' cart
 			$sql_delete="delete from shopping_cart_info where Username='$username'";
-			mysql_query($sql_delete);
+			mysql_query($sql_delete);	
 
 
 
@@ -69,7 +69,7 @@ session_start();
 	function cartReview($username){
 		if(isset($username)){
 			//echo "worked!";
-			$sql_select = 'select inventory_info.Item_Name, inventory_info.Item_ID, restaurant_info.Restrt_Name, shopping_cart_info.Quantity, inventory_info.Price from shopping_cart_info
+			$sql_select = 'select inventory_info.Item_Name, inventory_info.Item_ID, restaurant_info.Restrt_Name, shopping_cart_info.Quantity, inventory_info.Price from shopping_cart_info 
 			left join inventory_info on shopping_cart_info.Item_ID = inventory_info.Item_ID left join restaurant_info on shopping_cart_info.Restrt_ID = restaurant_info.Restrt_ID where Username ="'.$username.'"';
 		}
 		else{ echo "No user!";}
@@ -187,7 +187,7 @@ session_start();
 				</div>
 			</div>
 		</div><!--/header_top-->
-
+		
 		<div class="header-middle">
 			<div class="container" >
 				<div class="row" >
@@ -231,12 +231,11 @@ session_start();
 							<form id="Ship_Info">
 								<p><font size="3">Name</font></p>
 								<label>  <?php echo $_POST['fr_Ship_First_Name']." ".$_POST['fr_Ship_Last_Name'] ?> </label>
-
+								
 								<p><font size="3">Address</font></p>
-								<label>  <?php echo $_POST['fr_Ship_Address1']." ".$_POST['fr_Ship_Address2'] ?> </label>
-								<p></p>
+								<label>  <?php echo $_POST['fr_Ship_Address1']." ".$_POST['fr_Ship_Address2'] ?> </label>																<p></p>
 								<label>  <?php echo $_POST['fr_Ship_City']." ".$_POST['fr_Ship_State']." ".$_POST['fr_Ship_Zip'] ?> </label>
-
+								
 							</form>
 						</div>
 					</div>
@@ -244,15 +243,14 @@ session_start();
 						<div class="bill-to">
 						<p>Billing Information</p>
 							<div class="form-one">
-								<form id="Bill_Info">
-									<p><font size="3">Name</font></p>
+								<form id="Bill_Info">																	<p><font size="3">Name</font></p>
 									<label>  <?php echo $_POST['fr_Bill_First_Name']." ".$_POST['fr_Bill_Last_Name'] ?> </label><br>
 									<p><font size="3">Address</font></p>
 									<label>  <?php echo $_POST['fr_Bill_Address1']." ".$_POST['fr_Bill_Address2'] ?> </label>
 									<p></p>
 									<label>  <?php echo $_POST['fr_Bill_City']." ".$_POST['fr_Bill_State']." ".$_POST['fr_Bill_Zip'] ?> </label>
-
-
+									
+							
 								</form>
 							</div>
 						</div>
@@ -279,42 +277,6 @@ session_start();
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="shopper-informations">
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="shopper-info">
-							<form id="Ship_Info">
-								<input  readonly＝"readonly" type="hidden" id="Ship_First_Name" name="Ship_First_Name" type="text" placehold="First Name" value="<?php echo $_POST['fr_Ship_First_Name'] ?>">
-								<input  readonly＝"readonly" type="hidden" id="Ship_Last_Name" name="Ship_Last_Name" type="text" placehold="Last Name" value="<?php echo $_POST['fr_Ship_Last_Name'] ?>">
-								<input  readonly＝"readonly" type="hidden" id="Ship_Address1" name="Ship_Address1" type="text" placehold="Address1" value="<?php echo $_POST['fr_Ship_Address1'] ?>">
-								<input  readonly＝"readonly" type="hidden" id="Ship_Address2" name="Ship_Address2" type="text" placehold="Address2" value="<?php echo $_POST['fr_Ship_Address2'] ?>">
-								<input  readonly＝"readonly" type="hidden" id="Ship_City" name="Ship_City" type="text" placehold="City" value="<?php echo $_POST['fr_Ship_City'] ?>">
-								<input  readonly＝"readonly" type="hidden" id="Ship_State" name="Ship_State" type="text" placehold="State" value="<?php echo $_POST['fr_Ship_State'] ?>">
-								<input  readonly＝"readonly" type="hidden" id="Ship_Zip" name="Ship_Zip" type="text" placehold="Zip" value="<?php echo $_POST['fr_Ship_Zip'] ?>">
-							</form>
-						</div>
-					</div>
-					<div class="col-sm-7 clearfix">
-						<div class="bill-to">
-							<div class="form-one">
-								<form id="Bill_Info">
-									<input  readonly＝"readonly" type="hidden" id="Bill_First_Name" name="Bill_First_Name" type="text" placehold="First Name" value="<?php echo $_POST['fr_Bill_First_Name'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_Last_Name" name="Bill_Last_Name" type="text" placehold="Last Name" value="<?php echo $_POST['fr_Bill_Last_Name'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_Address1" name="Bill_Address1" type="text" placehold="Address1" value="<?php echo $_POST['fr_Bill_Address1'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_Address2" name="Bill_Address2" type="text" placehold="Address2" value="<?php echo $_POST['fr_Bill_Address2'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_City" name="Bill_City" type="text" placehold="City" value="<?php echo $_POST['fr_Bill_City'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_State" name="Bill_State" type="text" placehold="State" value="<?php echo $_POST['fr_Bill_State'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_Zip" name="Bill_Zip" type="text" placehold="Zip" value="<?php echo $_POST['fr_Bill_Zip'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_Type" name="Bill_Type" type="text" placehold="Card Type" value="<?php echo $_POST['fr_Bill_Type'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_Number" name="Bill_Number" type="text" placehold="Card Number" value="<?php echo $_POST['fr_Bill_Number'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_Holder" name="Bill_Holder" type="text" placehold="Card Holder" value="<?php echo $_POST['fr_Bill_Holder'] ?>">
-									<input  readonly＝"readonly" type="hidden" id="Bill_Expire" name="Bill_Expire" type="text" placehold="Expire Date" value="<?php echo $_POST['fr_Bill_Expire'] ?>">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="review-payment">
 				<h2>Review & Payment</h2>
@@ -378,10 +340,10 @@ session_start();
 							<h2><span>RUH</span>ungry</h2>
 							<p>CS6548 E-Commerce</p>
 						</div>
-					</div>
+					</div>					
 					<div class="col-sm-2">
 						<div class="address">
-							<img src="images/home/map.png" alt="" />
+							<img src="images/home/map.png" alt="" />							
 						</div>
 					</div>
 				</div>
