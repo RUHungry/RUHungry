@@ -20,7 +20,7 @@ session_start();
 		$alert_Insert ="INSERT INTO purchase_alerts (Alert_Info, Alert_Time, IP_Record, Card_Account,  Card_Holder, Username) VALUES('Credit card on hot list detected and stopped', '$time', '$ip', '$bill_number','$holder','daierzheng')";
 		mysql_query($alert_Insert)or die(mysql_error());
 		echo"<script language=\"javascript\">";
-        echo"alert(\"Alert: Failed\");";
+        echo"alert(\"Sorry！Your payment is rejected!\");";
         echo"history.go(-1);";
         echo"</script>"; 
 		}
