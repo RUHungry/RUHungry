@@ -13,7 +13,7 @@ function getAddressInfo()
 	while($row = mysql_fetch_array($result))
 	{
                                             
-		$output = '<button id="'.$row['shipping_ID'].' class="btn btn-primary"  "style="display:block;" type="button" onclick="setAddress(\''.$row['First_Name'].'\',\''.$row['Last_Name'].'\',\''.$row['Address1'].'\',\''.$row['Address2'].'\',\''.$row['City'].'\',\''.$row['State_USA'].'\',\''.$row['Zip'].'\')">'.$row['First_Name'].' '.$row['Last_Name'].'</button>';
+		$output = '<button id="'.$row['shipping_ID'].' class="btn btn-primary"  "style="display:block; margin-bottom:5px;" type="button" onclick="setAddress(\''.$row['First_Name'].'\',\''.$row['Last_Name'].'\',\''.$row['Address1'].'\',\''.$row['Address2'].'\',\''.$row['City'].'\',\''.$row['State_USA'].'\',\''.$row['Zip'].'\')">'.$row['First_Name'].' '.$row['Last_Name'].'</button>';
 		print $output;
 	}
 }
@@ -24,11 +24,11 @@ function getBillInfo()
 	$result = mysql_query($sql_select);
 	while($row = mysql_fetch_array($result))
 	{                                                                                                                                                                 
-		$output = '<button id="'.$row['Card_ID'].'"style="display:block;" type="button" onclick="setBill(\''.$row['Card_Account'].'\',\''.$row['Card_Holder'].'\', \''.$row['Card_Expire'].'\', \''.$row['Card_Type'].'\', \''.$row['First_Name'].'\', \''.$row['Last_Name'].'\',\''.$row['Address1'].'\',\''.$row['Address2'].'\',\''.$row['City'].'\',\''.$row['State_USA'].'\',\''.$row['Zip'].'\')">'.$row['Card_Account'].'</button>';
+		$output = '<button id="'.$row['Card_ID'].'"style="display:block; margin-bottom:5px;" type="button" onclick="setBill(\''.$row['Card_Account'].'\',\''.$row['Card_Holder'].'\', \''.$row['Card_Expire'].'\', \''.$row['Card_Type'].'\', \''.$row['First_Name'].'\', \''.$row['Last_Name'].'\',\''.$row['Address1'].'\',\''.$row['Address2'].'\',\''.$row['City'].'\',\''.$row['State_USA'].'\',\''.$row['Zip'].'\')">'.$row['Card_Account'].'</button>';
 		print $output;
 	}
 }
-
+/*
 if(isset($_POST['fr_Info'])){
 	$bill_number = $_POST['fr_Bill_Number'];
 	$select = "select * from credit_card_hotlist where Card_Account= '$bill_number'";
@@ -45,7 +45,8 @@ if(isset($_POST['fr_Info'])){
         
         echo"</script>"; 
 	}
-}
+}*/
+
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +78,7 @@ if(isset($_POST['fr_Info'])){
 <body>
 	<script type="text/javascript">
 	function finalReview()
-	{
+	{	
 		document.getElementById("fr_Ship_First_Name").value=document.getElementById("Ship_First_Name").value;
 		document.getElementById("fr_Ship_Last_Name").value=document.getElementById("Ship_Last_Name").value;
 		document.getElementById("fr_Ship_Address1").value=document.getElementById("Ship_Address1").value;
@@ -96,7 +97,52 @@ if(isset($_POST['fr_Info'])){
 		document.getElementById("fr_Bill_Number").value=document.getElementById("Bill_Number").value;
 		document.getElementById("fr_Bill_Holder").value=document.getElementById("Bill_Holder").value;
 		document.getElementById("fr_Bill_Expire").value=document.getElementById("Bill_Expire").value;
+		var alertMessage ="";
+    	if (document.getElementById("fr_Ship_First_Name").value.length<1)
+    	{
+			alertMessage+="Shipping First Name cannot be empty!\n\n";
+		}
+		if (document.getElementById("fr_Ship_Last_Name").value.length<1)
+    	{
+			alertMessage+="Shipping Last Name cannot be empty!\n\n";
+		}
+		if (document.getElementById("fr_Ship_Address1").value.length<1)
+    		alertMessage+="Shipping Address cannot be empty!\n\n";
+    	if (document.getElementById("fr_Ship_City").value.length<1)
+    		alertMessage+="Shipping City cannot be empty!\n\n";
+    	if (document.getElementById("fr_Ship_State").value.length<1)
+    		alertMessage+="Shipping State cannot be empty!\n\n";
+    	if (document.getElementById("fr_Ship_Zip").value.length!=5 || isNaN(document.getElementById("Ship_Zip").value))
+    		alertMessage+="Shipping Zip must be 5 digits!\n\n";
+		if (document.getElementById("fr_Bill_First_Name").value.length<1)
+    		alertMessage+="Billing First Name cannot be empty!\n\n";
+		if (document.getElementById("fr_Ship_Last_Name").value.length<1)
+    	{
+			alertMessage+="Billing Last Name cannot be empty!\n\n";
+		}
+    	if (document.getElementById("fr_Bill_Address1").value.length<1)
+    		alertMessage+="Billing Address cannot be empty!\n\n";
+    	if (document.getElementById("fr_Bill_City").value.length<1)
+    		alertMessage+="Billing City cannot be empty!\n\n";
+    	if (document.getElementById("fr_Bill_State").value.length<1)
+    		alertMessage+="Billing State cannot be empty!\n\n";
+		if (document.getElementById("Bill_Holder").value.length<1)
+    		alertMessage+="Card Holder cannot be empty!\n\n";
+    	if (document.getElementById("fr_Bill_Zip").value.length!=5 || isNaN(document.getElementById("Bill_Zip").value))
+    		alertMessage+="Billing Zip must be 5 digits!\n\n";
+    	if (document.getElementById("fr_Bill_Number").value.length!=16 || isNaN(document.getElementById("Bill_Number").value))
+    		alertMessage+="Card Number must be 16 digits!\n\n";
+			
 		
+		if (alertMessage.length>1)
+		{
+    		alert(alertMessage);
+		
+		}else
+		{
+			document.getElementById("fr_Info").submit();
+		}
+				
 		//var hotlist = 1;
 		//"<?php echo $_SESSION['row_number'] ?>";
 		///if(hotlist != 0){
@@ -105,6 +151,11 @@ if(isset($_POST['fr_Info'])){
 	//		document.getElementById("fr_Info").submit();
 	//	}
 
+	}
+
+	function checkOut()
+	{
+	
 	}
 	function setAddress(first_Name, last_Name, address1, address2, city, state, zip)
 	{
@@ -322,8 +373,9 @@ if(isset($_POST['fr_Info'])){
 					<div class="col-sm-3">
 						<div class="shopper-info">
 							<p>Shipping Information</p>
+							
 							<form id="Ship_Info" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
-								<input id="Ship_First_Name" name="Ship_First_Name" type="text" placeholder="First Name" value="<?php echo $_POST['Ship_First_Name'] ?>">
+								<input id="Ship_First_Name" name="Ship_First_Name" type="text" placeholder="First Name" value="<?php echo $_POST['Ship_First_Name'] ?>" >
 								<input id="Ship_Last_Name" name="Ship_Last_Name" type="text" placeholder="Last Name" value="<?php echo $_POST['Ship_Last_Name'] ?>">
 								<input id="Ship_Address1" name="Ship_Address1" type="text" placeholder="Address1" value="<?php echo $_POST['Ship_Address1'] ?>">
 								<input id="Ship_Address2" name="Ship_Address2" type="text" placeholder="Address2" value="<?php echo $_POST['Ship_Address2'] ?>">
@@ -348,12 +400,15 @@ if(isset($_POST['fr_Info'])){
 						    	?></p>
 						    	
 							</form>
-							<p>Choose from address book:</p>
+							<p><font size="2">Choose from address book:</font></p>
+							<div>
 							<?php getAddressInfo() ?>
+							</div>
 							<!-- <a class="btn btn-primary" href="">Get Quotes</a>
 							<a class="btn btn-primary" href="">Continue</a> -->
 						</div>
 					</div>
+					
 					<div class="col-sm-7 clearfix">
 						<div class="bill-to">
 						<p>Bill To</p>
@@ -425,8 +480,8 @@ if(isset($_POST['fr_Info'])){
 			</div>
 			<div class="payment-options" style="float:right; padding-right:30px;">
 				<form id="fr_Info"  name="fr_Info" action="orderConfirm.php" method="POST">
-					<button id="btn_fr" class="btn btn-primary"  name="btn_fr" onclick="finalReview()" >Checkout</button>
-					<input id="fr_Ship_First_Name" name="fr_Ship_First_Name" type="hidden">
+					<input type="button" id="btn_fr" class="btn btn-primary"  value ="Checkout" name="btn_fr" onclick="finalReview()" ></button>
+					<input id="fr_Ship_First_Name" name="fr_Ship_First_Name" type="hidden" >
 					<input id="fr_Ship_Last_Name" name="fr_Ship_Last_Name" type="hidden">
 					<input id="fr_Ship_Address1" name="fr_Ship_Address1" type="hidden">
 					<input id="fr_Ship_Address2" name="fr_Ship_Address2" type="hidden">
@@ -443,7 +498,8 @@ if(isset($_POST['fr_Info'])){
 					<input id="fr_Bill_Type" name="fr_Bill_Type" type="hidden">
 					<input id="fr_Bill_Number" name="fr_Bill_Number" type="hidden">
 					<input id="fr_Bill_Holder" name="fr_Bill_Holder" type="hidden">
-					<input id="fr_Bill_Expire" name="fr_Bill_Expire" type="hidden">					
+					<input id="fr_Bill_Expire" name="fr_Bill_Expire" type="hidden">
+					
 						<!-- <span>
 						
 							<label><input type="checkbox"> Direct Bank Transfer</label>
