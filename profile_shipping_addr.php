@@ -9,7 +9,7 @@ session_start();
 if($_SESSION["islogin"] != true)
 	header("Location: login.php");
 
-if (isset($_POST['submit']))
+/*if (isset($_POST['submit']))
 {
 	if($info['shipping_address'] != NULL)
 	{
@@ -23,29 +23,35 @@ if (isset($_POST['submit']))
 		$insert_check = mysql_query($insert) or die("Shipping address update failed.");
 		header("Location: profile_shipping_addr.php");
 	}
-}
-
-if(isset($_POST['Ship_Last_Name']))
+}*/
+else
 {
-	$sql="INSERT INTO shipping_address (Shipping_Address, Username)
-		VALUES
-		('$_POST[Ship_First_Name]| |$_POST[Ship_Last_Name]| |$_POST[Ship_Address1]| |$_POST[Ship_Address2]| |$_POST[Ship_City]| |$_POST[Ship_State]| |$_POST[Ship_Zip]','$_SESSION[username]')";
-	if (!mysql_query($sql))
-		die('Error: ' . mysql_error());
-	else echo "<script>alert('Success!')</script>";
-}
 
-if($_POST["submit2"]=='Delete'){
-			$ID = $_POST["shipping_id"];
-			$delete_addr = "DELETE FROM  shipping_address where shipping_ID = '$ID'";
-			if(!mysql_query($delete_addr)){
-				 echo "<script>alert('Failed!')</script>";
-			}
-			else{
-				 echo "<script>alert('Success!')</script>";
-			}
-}
-								
+	if(isset($_POST['Ship_Last_Name']))
+	{
+		$sql="INSERT INTO shipping_address (First_Name, Last_Name, Address1, Address2, City, State_USA, Zip, Username)
+			VALUES
+			('$_POST[Ship_First_Name]', '$_POST[Ship_Last_Name]','$_POST[Ship_Address1]','$_POST[Ship_Address2]','$_POST[Ship_City]','$_POST[Ship_State]','$_POST[Ship_Zip]','$_SESSION[username]')";
+		if (!mysql_query($sql))
+			die('Error: ' . mysql_error());
+		else 
+		header("Location: profile_shipping_addr.php");
+	}
+
+
+	if($_POST["submit2"]=='Delete'){
+				$ID = $_POST["shipping_id"];
+				$delete_addr = "DELETE FROM  shipping_address where shipping_ID = '$ID'";
+				if(!mysql_query($delete_addr)){
+					 echo "<script>alert('Failed!')</script>";
+				}
+				else{
+					 header("Location: profile_shipping_addr.php");
+				}
+
+	}
+
+}							
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +87,7 @@ if($_POST["submit2"]=='Delete'){
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-envelope"></i> URHungry@domain.com</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> RUHungry@domain.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -168,15 +174,15 @@ if($_POST["submit2"]=='Delete'){
 										$select = mysql_query("select * from shipping_address where Username = '".$_SESSION["username"]."'") or die(mysql_error());
 										while ($info = mysql_fetch_array($select))
 										{
-										$Addr = split('\| \|', $info['shipping_address'], 7);
+
 										echo('<tr><td>'.$info['shipping_ID'].'</td>');
-										echo('<td>'.$Addr[0].'</td>');
-										echo('<td>'.$Addr[1].'</td>');
-										echo('<td>'.$Addr[2].'</td>');
-										echo('<td>'.$Addr[3].'</td>');
-										echo('<td>'.$Addr[4].'</td>');
-										echo('<td>'.$Addr[5].'</td>');
-										echo('<td>'.$Addr[6].'</td>');
+										echo('<td>'.$info['First_Name'].'</td>');
+										echo('<td>'.$info['Last_Name'].'</td>');
+										echo('<td>'.$info['Address1'].'</td>');
+										echo('<td>'.$info['Address2'].'</td>');
+										echo('<td>'.$info['City'].'</td>');
+										echo('<td>'.$info['State_USA'].'</td>');
+										echo('<td>'.$info['Zip'].'</td>');
 										echo('<td><a href="javascript:add_edit()">Add</a> | <a href="javascript:delete_addr()">Delete</a></td></tr>');
 										}
 									 ?>
@@ -205,12 +211,13 @@ if($_POST["submit2"]=='Delete'){
 						    	<p><?php
 						    	if(isset($_POST['Ship_Last_Name']))
 								{
-									$sql="INSERT INTO shipping_address (Shipping_Address, Username)
+									$sql="INSERT INTO shipping_address (First_Name, Last_Name, Address1, Address2, City, State_USA, Zip, Username)
 								VALUES
-								('$_POST[Ship_First_Name]| |$_POST[Ship_Last_Name]| |$_POST[Ship_Address1]| |$_POST[Ship_Address2]| |$_POST[Ship_City]| |$_POST[Ship_State]| |$_POST[Ship_Zip]','$_SESSION[username]')";
+								('$_POST[Ship_First_Name]', '$_POST[Ship_Last_Name]','$_POST[Ship_Address1]','$_POST[Ship_Address2]','$_POST[Ship_City]','$_POST[Ship_State]','$_POST[Ship_Zip]','$_SESSION[username]')";
 									if (!mysql_query($sql,$con))
 											die('Error: ' . mysql_error());
 									else echo "<script>alert('Success!')</script>";
+									header("Location: profile_shipping_addr.php");
 								}
 						    	?></p>
 						    	

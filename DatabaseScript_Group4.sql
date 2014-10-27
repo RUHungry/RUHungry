@@ -182,9 +182,9 @@ INSERT INTO customer_info (Username, First_Name, Last_Name, Email, Password) VAL
 INSERT INTO administrator_users (Username, First_Name, Last_Name, Email, Password) VALUES ('admin', 'Tianlang', 'Lin', 'terrylin@gwu.edu', 'admin');
 
 # restaurant_info test data
-INSERT INTO restaurant_info (Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description) VALUES ('XOTaste', 'Arlington', '1', '12451 Army Navy Drive, Arlington, VA', 'Chinese', 'Szechwan cuisine');
-INSERT INTO restaurant_info (Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description) VALUES ('YoungChow', 'Arlington', '1', '1251 28th, Arlington, VA', 'Chinese', 'Shanghai cuisine');
-INSERT INTO restaurant_info (Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description) VALUES ('Sakura', 'Arlington', '1', '2321 13th, Arlington, VA', 'Japanese', 'Sushi');
+INSERT INTO restaurant_info (Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description, Img) VALUES ('XOTaste', 'Arlington', '1', '12451 Army Navy Drive, Arlington, VA', 'Chinese', 'Szechwan cuisine', 'images/product-details/ls.jpg');
+INSERT INTO restaurant_info (Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description, Img) VALUES ('YoungChow', 'Arlington', '1', '1251 28th, Arlington, VA', 'Chinese', 'Shanghai cuisine', 'images/product-details/youngchow.jpg');
+INSERT INTO restaurant_info (Restrt_Name, Area, Ship_Hours, Address, Restrt_Type, Description, Img) VALUES ('Sakura', 'Arlington', '1', '2321 13th, Arlington, VA', 'Japanese', 'Sushi', 'images/product-details/Sakura.jpg');
 
 # inventory_info test data
 INSERT INTO inventory_info (Restrt_ID, Item_Name, Item_Description, Price, Date_Added, Category) VALUES (1, 'KongBaoChicken', 'ChickenwithPepper', '12.00', '2014-10-05 00:00:00', 'Chinese');
@@ -203,10 +203,10 @@ INSERT INTO shopping_cart_info (Username , Item_ID , Restrt_ID , Quantity) VALUE
 INSERT INTO shopping_cart_info (Username , Item_ID , Restrt_ID , Quantity) VALUES ('daierzheng', 1, 1, 1);
 
 # credit_card_info test data
-INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('lintianlang', '0000012345678901', 'visa', 'Tianlang Lin', '2018-10-05 00:00:00', '1400 S Joyce St, Arlington, VA 22202');
-INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('chenlongjiu', '0000012345678902', 'visa', 'Longjiu Chen', '2018-09-05 00:00:00', '1500 S Joyce St, Arlington, VA 22202');
-INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('daierzheng', '0000012345678903', 'visa', 'Erzheng Dai', '2018-07-05 00:00:00', '1700 S Eads St, Arlington, VA 22202');
-INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('zhangzhenlin', '0000012345678904', 'visa', 'Zhenlin Zhang', '2018-06-05 00:00:00', '1900 S Eads St, Arlington, VA 22202');
+INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, First_Name, Last_Name, Address1, Address2, City, State_USA, Zip) VALUES ('lintianlang', '0000012345678901', 'visa', 'Tianlang Lin', '2018-10-05 00:00:00', 'Tianlang', 'Lin', '1100 S Joyce St', 'Apt 123', 'Arlington', 'VA', '22202');
+INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, First_Name, Last_Name, Address1, Address2, City, State_USA, Zip) VALUES ('chenlongjiu', '0000012345678902', 'visa', 'Longjiu Chen', '2018-09-05 00:00:00', 'Longjiu', 'Chen', '1500 S Joyce St', 'Apt 253', 'Arlington', 'VA', '22202');
+INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, First_Name, Last_Name, Address1, Address2, City, State_USA, Zip) VALUES ('daierzheng', '0000012345678903', 'visa', 'Erzheng Dai', '2018-07-05 00:00:00', 'Erzheng', 'Dai', '1700 S Eads St', 'Apt 1142', 'Arlington', 'VA', '22202');
+INSERT INTO credit_card_info (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, First_Name, Last_Name, Address1, Address2, City, State_USA, Zip) VALUES ('zhangzhenlin', '0000012345678904', 'visa', 'Zhenlin Zhang', '2018-06-05 00:00:00', 'Zhenlin', 'Zhang', '1900 S Eads St', 'Apt 825', 'Arlington', 'VA', '22202');
 
 # credit_card_hotlist test data
 INSERT INTO credit_card_hotlist (Username, Card_Account, Card_Type, Card_Holder, Card_Expire, Bill_Address) VALUES ('lintianlang', '0000012345678901', 'visa', 'Tianlang Lin', '2018-10-05 00:00:00', '1400 S Joyce St, Arlington, VA 22202');
@@ -222,3 +222,8 @@ INSERT INTO purchase_alerts (Alert_Info, Alert_Time, IP_Record, Username) VALUES
 INSERT INTO purchase_alerts (Alert_Info, Alert_Time, IP_Record, Username) VALUES('Transfer Failed', '2014-10-05 11:45:00', '112.17.102.19', 'lintianlang');
 INSERT INTO purchase_alerts (Alert_Info, Alert_Time, IP_Record, Username) VALUES('Transfer Failed', '2014-10-05 21:12:00', '107.54.12.87', 'daierzheng');
 
+#shipping_address test data
+INSERT INTO shipping_address (First_Name, Last_Name, Address1, Address2, City, State_USA, Zip, Username) VALUES('Tianlang', 'Lin', '1100 S Joyce St', 'Apt 123', 'Arlington', 'VA', '22202', 'lintianlang');
+INSERT INTO shipping_address (First_Name, Last_Name, Address1, Address2, City, State_USA, Zip, Username) VALUES('Longjiu', 'Chen', '1500 S Joyce St', 'Apt 253', 'Arlington', 'VA', '22202', 'chenlongjiu');
+INSERT INTO shipping_address (First_Name, Last_Name, Address1, Address2, City, State_USA, Zip, Username) VALUES('Erzheng', 'Dai', '1700 S Eads St', 'Apt 1142', 'Arlington', 'VA', '22202', 'daierzheng');
+INSERT INTO shipping_address (First_Name, Last_Name, Address1, Address2, City, State_USA, Zip, Username) VALUES('Zhenlin', 'Zhang', '1900 S Eads St', 'Apt 825', 'Arlington', 'VA', '22202', 'zhangzhenlin');

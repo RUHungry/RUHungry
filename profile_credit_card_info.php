@@ -11,18 +11,20 @@ if($_SESSION["islogin"] != true)
 	
 if (isset($_POST['submit']))
 {
-	if($info['Card_Account'] != NULL)
+	if($_SESSION["Card_Account"] != NULL)
 	{
-		$update = "update credit_card_hotlist set Card_Account = '".$_POST['account']."', Card_Type = '".$_POST['type'].
-		"', Card_Holder = '".$_POST['holder']."', Card_Expire = '".$_POST['exp_date']."', Bill_Address = '".$_POST['address']."'";
+		$update = "update credit_card_info set Card_Account = '".$_POST['account']."', Card_Type = '".$_POST['type'].
+		"', First_Name = '".$_POST['First_Name']."', Last_Name = '".$_POST['Last_Name']."', Card_Expire = '".$_POST['exp_date']."', Address1 = '".$_POST['Address1'].
+		"', Address2 = '".$_POST['Address2']."', City = '".$_POST['City']."', State_USA = '".$_POST['State_USA']."', Zip = '".$_POST['Zip']."' where Username = '".$_SESSION["username"]."'";
 		
 		$update_check = mysql_query($update) or die("Update failed.");
 		header("Location: profile_credit_card_info.php");
 	}
 	else
-	{
-		$insert = "insert into credit_card_hotlist set Username = '".$_SESSION["username"]."', Card_Account = '".$_POST['account']."', Card_Type = '".$_POST['type'].
-		"', Card_Holder = '".$_POST['holder']."', Card_Expire = '".$_POST['exp_date']."', Bill_Address = '".$_POST['address']."'";
+	{	
+		$insert = "insert into credit_card_info set Username = '".$_SESSION["username"]."', Card_Account = '".$_POST['account']."', Card_Type = '".$_POST['type'].
+		"', Card_Holder = '".$_POST['holder']."', Card_Expire = '".$_POST['exp_date']."', Address1 = '".$_POST['Address1'].
+		"', Address2 = '".$_POST['Address2']."', City = '".$_POST['City']."', State_USA = '".$_POST['State_USA']."', Zip = '".$_POST['Zip']."'";
 		$insert_check = mysql_query($insert) or die("Update failed.");
 		header("Location: profile_credit_card_info.php");
 	}
@@ -135,7 +137,8 @@ if (isset($_POST['submit']))
 								  <tr>
 									 <th>Card Number</th>
 									 <th>Card Type</th>
-									 <th>Card Holder</th>
+									 <th>First Name</th>
+									 <th>Last Name</th>									 
 									 <th>Expire Date</th>
 									 <th>Billing Address</th>
 									 <th>Operation</th>
@@ -144,13 +147,16 @@ if (isset($_POST['submit']))
 							   <tbody>
 								  <tr>
 									 <?php
-										$select = mysql_query("select * from credit_card_hotlist where Username = '".$_SESSION["username"]."'") or die(mysql_error());
+										$select = mysql_query("select * from credit_card_info where Username = '".$_SESSION["username"]."'") or die(mysql_error());
 										$info = mysql_fetch_array($select);
+										if($info['Card_Account'] != NULL)
+										$_SESSION["Card_Account"] = $info['Card_Account'];
 										echo('<td>'.$info['Card_Account'].'</td>');
 										echo('<td>'.$info['Card_Type'].'</td>');
-										echo('<td>'.$info['Card_Holder'].'</td>');
+										echo('<td>'.$info['First_Name'].'</td>');
+										echo('<td>'.$info['Last_Name'].'</td>');
 										echo('<td>'.$info['Card_Expire'].'</td>');
-										echo('<td>'.$info['Bill_Address'].'</td>');
+										echo('<td>'.$info['Address1'].' '.$info['Address2'].', '.$info['City'].', '.$info['State_USA'].' '.$info['Zip'].'</td>');
 									 ?>
 									 <td><a href="javascript:add_edit()">Edit</a></td>
 								  </tr>
@@ -161,25 +167,25 @@ if (isset($_POST['submit']))
 							</div>
 							<div class="container" style="padding-top:50px; padding-bottom:100px; display:none;" id="div_edit">
 								<div class="row">
-									<div class="col-sm-8">
+									<div class="col-sm-4">
 										<div class="login-form"><!--login form-->
 											<h2>Input your new credit card information</h2>
 											<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
 												<input type="text" name="account" placeholder="Card Number" required="required">
 												<input type="text" name="type" placeholder="Card Type" required="required">
-												<input type="text" name="holder" placeholder="Card Holder" required="required">
+												<input type="text" name="First_Name" placeholder="First Name" required="required">
+												<input type="text" name="Last_Name" placeholder="Last Name" required="required">												
 												<input type="text" name="exp_date" placeholder="Expire Date" required="required">
-												<input type="text" name="address" placeholder="Billing Address" required="required">
+												<input type="text" name="Address1" placeholder="Address1" required="required">
+												<input type="text" name="Address2" placeholder="Address2" required="required">
+												<input type="text" name="City" placeholder="City" required="required">
+												<input type="text" name="State_USA" placeholder="State" required="required">
+												<input type="text" name="Zip" placeholder="Zip" required="required">												
 												<button type="submit" value="submit" name="submit" class="btn btn-default">Submit</button>
 											</form>											
 										</div><!--/login form-->
 									</div>							
-<!-- 							<div class="form-one" style="display:none" id="div_edit">
-								<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" >
-									<input type="text" name="address" placeholder="Shipping Address" required="required">
-									<button type="submit" value="submit" name="submit" class="btn btn-default">Submit</button>
-								</form>
-							</div> -->
+
 							</div>
 						</div>
 						</div>
